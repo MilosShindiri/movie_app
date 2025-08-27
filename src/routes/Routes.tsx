@@ -5,17 +5,18 @@ import DetailsPage from "../pages/Details";
 import TablePage from "../pages/Table";
 import ChartsPage from "../pages/Charts";
 import LoginPage from "../pages/Login";
+import { PagePaths } from "./utils";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
-      { path: "", element: <HomePage /> },
-      { path: "table", element: <TablePage /> },
-      { path: "charts", element: <ChartsPage /> },
-      { path: "movieDetails/:id", element: <DetailsPage /> },
-      { path: "login", element: <LoginPage /> },
+      { path: PagePaths.HOME, element: <HomePage /> },
+      { path: PagePaths.TABLE, element: <TablePage /> },
+      { path: PagePaths.CHARTS, element: <ChartsPage /> },
+      { path: PagePaths.DETAILS, element: <DetailsPage /> },
+      { path: PagePaths.LOGIN, element: <LoginPage /> },
     ],
   },
 ]);
