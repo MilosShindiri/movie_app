@@ -1,4 +1,10 @@
+import { Outlet } from "react-router-dom";
+
 export default function App() {
-  console.log("App loaded");
-  return <h1>Hello</h1>;
+  // here potencialy goes breadcrumps ref:https://www.youtube.com/watch?v=h7MTWLv3xvw
+  return (
+    <>
+      <Outlet />
+    </>
+  );
 }
