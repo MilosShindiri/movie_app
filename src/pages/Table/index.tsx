@@ -1,8 +1,13 @@
+import { Header } from "../../components/Header";
+
 const TablePage = () => {
   return (
-    <section>
-      <h1>Table Page is working!</h1>
-    </section>
+    <>
+      <Header />
+      <section>
+        <h1>Table Page is working!</h1>
+      </section>
+    </>
   );
 };
 

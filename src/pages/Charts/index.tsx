@@ -1,8 +1,13 @@
+import { Header } from "../../components/Header";
+
 const ChartsPage = () => {
   return (
-    <section>
-      <h1>Chart Page is working!</h1>
-    </section>
+    <>
+      <Header />
+      <section>
+        <h1>Chart Page is working!</h1>
+      </section>
+    </>
   );
 };
 

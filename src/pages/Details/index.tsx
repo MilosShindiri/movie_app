@@ -1,8 +1,13 @@
+import { Header } from "../../components/Header";
+
 const DetailsPage = () => {
   return (
-    <section>
-      <h1>Details Page is working!</h1>
-    </section>
+    <>
+      <Header />
+      <section>
+        <h1>Details Page is working!</h1>
+      </section>
+    </>
   );
 };
 
