@@ -16,7 +16,7 @@ export const Header: FC = () => {
     <StyledHeader>
       <LeftNav>
         <StyledLogoLink to="/">
-          <Logo src="../src/assets/movie_icon.png" alt="logo" />
+          <Logo src="/public/movie_icon.png" alt="logo" />
         </StyledLogoLink>
         <StyledH1>Movies</StyledH1>
       </LeftNav>
