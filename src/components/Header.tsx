@@ -1,4 +1,3 @@
-import type { FC } from "react";
 import {
   StyledHeader,
   LeftNav,
@@ -9,9 +8,15 @@ import {
   StyledLogoLink,
   StyledCenterLink,
   StyledRightLink,
+  StyledLogout,
 } from "./Header.styled";
+import { useAuth } from "../context/useAuth";
+import type { FC } from "react";
+import { toast } from "react-toastify";
 
 export const Header: FC = () => {
+  const { isAuthenticated, logout } = useAuth();
+
   return (
     <StyledHeader>
       <LeftNav>
@@ -27,7 +32,18 @@ export const Header: FC = () => {
       </CenterNav>
 
       <RightNav>
-        <StyledRightLink to="/login">Login</StyledRightLink>
+        {isAuthenticated ? (
+          <StyledLogout
+            onClick={() => {
+              logout();
+              toast.info("You have been logged out.");
+            }}
+          >
+            Logout
+          </StyledLogout>
+        ) : (
+          <StyledRightLink to="/login">Login</StyledRightLink>
+        )}
       </RightNav>
     </StyledHeader>
   );

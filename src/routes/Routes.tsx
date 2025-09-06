@@ -5,7 +5,9 @@ import DetailsPage from "../pages/Details";
 import TablePage from "../pages/Table";
 import ChartsPage from "../pages/Charts";
 import LoginPage from "../pages/Login";
-import { PagePaths } from "./utils";
+import { ProtectedRoute } from "./ProtectedRoute";
+
+import { PagePaths } from "./routes_utils";
 
 export const router = createBrowserRouter([
   {
@@ -13,10 +15,16 @@ export const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: PagePaths.HOME, element: <HomePage /> },
-      { path: PagePaths.TABLE, element: <TablePage /> },
-      { path: PagePaths.CHARTS, element: <ChartsPage /> },
-      { path: PagePaths.DETAILS, element: <DetailsPage /> },
       { path: PagePaths.LOGIN, element: <LoginPage /> },
+      { path: PagePaths.DETAILS, element: <DetailsPage /> },
+
+      {
+        element: <ProtectedRoute />,
+        children: [
+          { path: PagePaths.TABLE, element: <TablePage /> },
+          { path: PagePaths.CHARTS, element: <ChartsPage /> },
+        ],
+      },
     ],
   },
 ]);
