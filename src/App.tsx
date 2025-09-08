@@ -6,21 +6,19 @@ import { ToastContainer } from "react-toastify";
 export default function App() {
   // here potencialy goes breadcrumps ref:https://www.youtube.com/watch?v=h7MTWLv3xvw
   return (
-    <>
+    <AuthProvider>
       <GlobalStyle />
-      <AuthProvider>
-        <ToastContainer
-          position="bottom-right"
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          pauseOnFocusLoss
-          draggable
-          theme="colored"
-        />
-        <Outlet />
-      </AuthProvider>
-    </>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        pauseOnFocusLoss
+        draggable
+        theme="colored"
+      />
+      <Outlet />
+    </AuthProvider>
   );
 }
