@@ -1,5 +1,5 @@
 export const PagePaths = {
-  HOME: "",
+  HOME: "/",
   TABLE: "table",
   CHARTS: "charts",
   DETAILS: "movieDetails/:id",

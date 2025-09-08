@@ -68,3 +68,18 @@ export const StyledRightLink = styled(Link)`
     text-decoration: underline;
   }
 `;
+
+export const StyledLogout = styled.button`
+  color: white;
+  background: none;
+  border: none;
+  font-size: 24px;
+  margin-right: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: inherit;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
