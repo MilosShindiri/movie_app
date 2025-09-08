@@ -28,7 +28,6 @@ export const FormInput: FC<FormInputProps> = ({
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   const isPassword = type === "password";
-  // console.log(`Rendering FormInput: ${label}`);
 
   return (
     <>

@@ -11,10 +11,10 @@ import { AppLayout } from "./AppLayout";
 
 export const router = createBrowserRouter([
   {
-    element: <App />, // <- ovo je sada root aplikacija
+    element: <App />,
     children: [
       {
-        element: <AppLayout />, // <- samo rute koje trebaju header
+        element: <AppLayout />,
         children: [
           { path: PagePaths.HOME, element: <HomePage /> },
           { path: PagePaths.DETAILS, element: <DetailsPage /> },
@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
           },
         ],
       },
-      { path: PagePaths.LOGIN, element: <LoginPage /> }, // bez headera
+      { path: PagePaths.LOGIN, element: <LoginPage /> },
     ],
   },
 ]);

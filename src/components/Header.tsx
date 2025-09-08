@@ -13,6 +13,7 @@ import {
 import { useAuth } from "../context/useAuth";
 import type { FC } from "react";
 import { toast } from "react-toastify";
+import { PagePaths } from "../routes/routes_utils";
 
 export const Header: FC = () => {
   const { isAuthenticated, logout } = useAuth();
@@ -20,15 +21,15 @@ export const Header: FC = () => {
   return (
     <StyledHeader>
       <LeftNav>
-        <StyledLogoLink to="/">
+        <StyledLogoLink to={PagePaths.HOME}>
           <Logo src="/public/images/movie_icon.png" alt="logo" />
         </StyledLogoLink>
         <StyledH1>Movies</StyledH1>
       </LeftNav>
 
       <CenterNav>
-        <StyledCenterLink to="/table">Table</StyledCenterLink>
-        <StyledCenterLink to="/charts">Charts</StyledCenterLink>
+        <StyledCenterLink to={PagePaths.TABLE}>Table</StyledCenterLink>
+        <StyledCenterLink to={PagePaths.CHARTS}>Charts</StyledCenterLink>
       </CenterNav>
 
       <RightNav>
@@ -42,7 +43,7 @@ export const Header: FC = () => {
             Logout
           </StyledLogout>
         ) : (
-          <StyledRightLink to="/login">Login</StyledRightLink>
+          <StyledRightLink to={PagePaths.LOGIN}>Login</StyledRightLink>
         )}
       </RightNav>
     </StyledHeader>

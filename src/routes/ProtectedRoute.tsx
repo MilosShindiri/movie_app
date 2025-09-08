@@ -2,25 +2,24 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuth } from "../context/useAuth";
 import { useEffect, useRef } from "react";
+import { PagePaths } from "./routes_utils";
 
 export const ProtectedRoute = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, didLogout } = useAuth();
   const location = useLocation();
-
   const toastShownRef = useRef(false);
 
   useEffect(() => {
-    if (!isAuthenticated && !toastShownRef.current) {
-      toast.error("Morate biti ulogovani da biste pristupili ovoj stranici", {
+    if (!isAuthenticated && !didLogout && !toastShownRef.current) {
+      toast.error("You must be logged in to access this page!", {
         toastId: "auth-error",
       });
       toastShownRef.current = true;
     }
-  }, [isAuthenticated]);
-  console.log(isAuthenticated);
+  }, [isAuthenticated, didLogout]);
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace state={{ from: location }} />;
+    return <Navigate to={PagePaths.LOGIN} replace state={{ from: location }} />;
   }
 
   return <Outlet />;

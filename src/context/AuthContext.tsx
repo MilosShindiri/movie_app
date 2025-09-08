@@ -4,6 +4,7 @@ import { AuthContext } from "./useAuth";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { SESSION_TIMEOUT_MS } from "./authConstants";
+import { PagePaths } from "../routes/routes_utils";
 
 export interface AuthContextType {
   user: User | null;
@@ -15,6 +16,7 @@ export interface AuthContextType {
   }) => Promise<void>;
   logout: (autoLogout?: boolean) => void;
   didLogout: boolean;
+  setDidLogout: (value: boolean) => void;
 }
 
 interface User {
@@ -53,7 +55,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setUser(null);
     setIsAuthenticated(false);
     clearAuthFromStorage();
-    navigate("/", { replace: true });
+    navigate(PagePaths.HOME, { replace: true });
   };
 
   useEffect(() => {
@@ -128,7 +130,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       setIsAuthenticated(true);
       toast.success("Successfully logged in!");
-      navigate("/");
+      navigate(PagePaths.HOME, { replace: true });
     } catch {
       toast.error("Login failed");
     }
@@ -140,6 +142,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     login,
     logout,
     didLogout,
+    setDidLogout,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
