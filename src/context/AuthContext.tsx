@@ -56,6 +56,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setIsAuthenticated(false);
     clearAuthFromStorage();
     navigate(PagePaths.HOME, { replace: true });
+    window.history.pushState(null, "", PagePaths.HOME);
   };
 
   useEffect(() => {

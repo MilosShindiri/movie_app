@@ -19,7 +19,13 @@ export const ProtectedRoute = () => {
   }, [isAuthenticated, didLogout]);
 
   if (!isAuthenticated) {
-    return <Navigate to={PagePaths.LOGIN} replace state={{ from: location }} />;
+    return (
+      <Navigate
+        to={PagePaths.LOGIN}
+        replace={true}
+        state={{ from: location }}
+      />
+    );
   }
 
   return <Outlet />;

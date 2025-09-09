@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import App from "../App"; // <- koristi App kao root shell
+import App from "../App";
 import HomePage from "../pages/Home";
 import DetailsPage from "../pages/Details";
 import TablePage from "../pages/Table";
@@ -18,8 +18,13 @@ export const router = createBrowserRouter([
         children: [
           { path: PagePaths.HOME, element: <HomePage /> },
           { path: PagePaths.DETAILS, element: <DetailsPage /> },
+        ],
+      },
+      {
+        element: <ProtectedRoute />,
+        children: [
           {
-            element: <ProtectedRoute />,
+            element: <AppLayout />,
             children: [
               { path: PagePaths.TABLE, element: <TablePage /> },
               { path: PagePaths.CHARTS, element: <ChartsPage /> },
