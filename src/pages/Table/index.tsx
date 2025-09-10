@@ -3,11 +3,13 @@ import { ClipLoader } from "react-spinners";
 import { Table } from "../../components/Table";
 import { LoaderWrapper } from "../../components/TableStyled";
 import { SearchFilter } from "../../components/TableFilters";
+import { useDebounce } from "../../hooks/useDebounce";
 
 const TablePage = () => {
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState("");
 
+  const debouncedQuery = useDebounce(query, 500);
   return (
     <Suspense
       fallback={
@@ -17,7 +19,7 @@ const TablePage = () => {
       }
     >
       <SearchFilter query={query} onQueryChange={setQuery} />
-      <Table page={page} query={query} />
+      <Table page={page} query={debouncedQuery} />
     </Suspense>
   );
 };
