@@ -9,20 +9,27 @@ import {
   flexRender,
   getCoreRowModel,
   useReactTable,
+  type SortingState,
 } from "@tanstack/react-table";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa";
 
-export const Table = ({
-  page = 1,
-  genre,
-  year,
-  query,
-  sortBy,
-}: MovieQueryParams) => {
+export const Table = ({ page = 1, genre, year, query }: MovieQueryParams) => {
+  const [sorting, setSorting] = useState<SortingState>([]);
+
+  const order = sorting[0]?.desc ? "desc" : "asc";
+  const sort = sorting[0]?.id ?? undefined;
+
   const { data, isLoading, error } = useQuery(
-    getMoviesOptions({ page, genre, year, query, sortBy })
+    getMoviesOptions({
+      page,
+      genre,
+      year,
+      query,
+      sortBy: sort ? `${sort}.${order}` : undefined,
+    })
   );
-
+  console.log(sorting);
   const movies = data?.results ?? [];
 
   const columnHelper = useMemo(() => createColumnHelper<Movie>(), []);
@@ -31,15 +38,18 @@ export const Table = ({
     () => [
       columnHelper.accessor("title", {
         header: "Title",
+        enableSorting: true,
         cell: (info) => info.getValue(),
       }),
       columnHelper.accessor("release_date", {
         header: "Release Date",
+        enableSorting: true,
         cell: (info) => info.getValue(),
       }),
       columnHelper.accessor("vote_average", {
         header: "Rating",
-        cell: (info) => info.getValue().toFixed(1),
+        enableSorting: true,
+        cell: (info) => info.getValue()?.toFixed(1) ?? "N/A",
       }),
     ],
     [columnHelper]
@@ -49,6 +59,8 @@ export const Table = ({
     data: movies,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    state: { sorting },
+    onSortingChange: setSorting,
   });
 
   if (isLoading)
@@ -70,11 +82,25 @@ export const Table = ({
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th key={header.id}>
-                  <div>
+                <th key={header.id} className="users-table-cell">
+                  <div
+                    {...{
+                      className: header.column.getCanSort()
+                        ? "cursor-pointer select-none"
+                        : "",
+                      onClick: header.column.getToggleSortingHandler(),
+                    }}
+                  >
                     {flexRender(
                       header.column.columnDef.header,
                       header.getContext()
+                    )}
+                    {header.column.getIsSorted() === "asc" ? (
+                      <FaSortUp />
+                    ) : header.column.getIsSorted() === "desc" ? (
+                      <FaSortDown />
+                    ) : (
+                      <FaSort />
                     )}
                   </div>
                 </th>
