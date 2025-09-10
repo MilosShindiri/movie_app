@@ -1,16 +1,26 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { getPopularMovies, getGenres } from "../services/api/tmdbService";
+import { useQuery } from "@tanstack/react-query";
+import { queryOptions } from "@tanstack/react-query";
+import { tmdbService } from "../services/api/tmdbService";
+import type { MovieQueryParams } from "../types/movies";
 
-export const usePopularMovies = () => {
-  return useSuspenseQuery({
-    queryKey: ["popularMovies"],
-    queryFn: getPopularMovies,
+export const getMoviesOptions = (params: MovieQueryParams = {}) =>
+  queryOptions({
+    queryKey: ["movies", params],
+    queryFn: () =>
+      params.query && params.query.trim() !== ""
+        ? tmdbService.getSearchedMovies(params)
+        : tmdbService.getPopularMovies(params),
+    staleTime: 5 * 60 * 1000,
+    gcTime: 10 * 60 * 1000,
   });
-};
 
-export const useGenres = () => {
-  return useSuspenseQuery({
-    queryKey: ["movieGenres"],
-    queryFn: getGenres,
+export const getGenresOptions = () =>
+  queryOptions({
+    queryKey: ["movie-genres"],
+    queryFn: tmdbService.getGenres,
   });
-};
+
+export const usePopularMovies = (params: MovieQueryParams = {}) =>
+  useQuery(getMoviesOptions(params));
+
+export const useGenres = () => useQuery(getGenresOptions());

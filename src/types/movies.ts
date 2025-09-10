@@ -22,3 +22,13 @@ export interface MovieQueryParams {
   query?: string;
   sortBy?: string;
 }
+
+export interface Genre {
+  id: number;
+  name: string;
+}
+
+export interface SearchFilterProps {
+  query: string;
+  onQueryChange: (value: string) => void;
+}
