@@ -22,6 +22,7 @@ export const tmdbService = {
         params: {
           page: params.page ?? 1,
           query: params.query,
+          sort_by: params.sortBy,
         },
       })
       .then((res) => res.data),
