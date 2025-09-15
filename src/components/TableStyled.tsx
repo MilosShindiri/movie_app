@@ -35,7 +35,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Header = styled.div`
-  background-color: #4caf50;
+  background-color: #35589a;
   padding: 1rem 1.5rem;
   display: flex;
   justify-content: space-between;
@@ -117,7 +117,7 @@ export const PaginationWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   margin: 2rem auto;
   flex-wrap: wrap;
 
@@ -158,5 +158,57 @@ export const PaginationWrapper = styled.div`
     color: #666;
     padding: 0 4px;
     user-select: none;
+  }
+`;
+
+export const FilterContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`;
+
+export const FilterButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background-color: #f4f4f4;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #333;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #ffd7b5;
+  }
+
+  svg {
+    margin-bottom: 1px;
+  }
+`;
+
+export const GoToPageWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+
+  span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #c9a9a6;
+  }
+
+  input {
+    width: 60px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+
+  label {
+    font-weight: 500;
   }
 `;

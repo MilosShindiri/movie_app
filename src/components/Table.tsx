@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 import type { Movie } from "../types/movies";
 import { getMoviesOptions } from "../queries/movies";
 import {
+  FilterContainer,
+  GoToPageWrapper,
   Header,
   LoaderWrapper,
   PaginationWrapper,
@@ -19,7 +21,7 @@ import {
   type SortingState,
   type PaginationState,
 } from "@tanstack/react-table";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   FaAngleDoubleLeft,
   FaAngleDoubleRight,
@@ -29,11 +31,14 @@ import {
   FaSortDown,
   FaSortUp,
 } from "react-icons/fa";
-import { SearchFilter } from "./TableFilters";
+import { SearchFilter } from "./Search";
 import { useDebounce } from "../hooks/useDebounce";
+import { Filters } from "./Filters";
+import { SidebarFilter } from "./SidebarFilter";
 
 export const Table = () => {
   const [query, setQuery] = useState("");
+
   const normalizedQuery = query.replace(/\s+/g, " ").trim();
   const debouncedQuery = useDebounce(
     normalizedQuery === "" ? undefined : normalizedQuery,
@@ -41,7 +46,8 @@ export const Table = () => {
   );
 
   const [sorting, setSorting] = useState<SortingState>([]);
-
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [filters, setFilters] = useState<{ genre?: number; year?: number }>({});
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 20,
@@ -62,8 +68,10 @@ export const Table = () => {
       query: debouncedQuery,
       sortBy: sortField ? `${sortField}.${order}` : undefined,
       page: pagination.pageIndex + 1,
+      genre: filters.genre,
+      year: filters.year,
     };
-  }, [debouncedQuery, sortField, order, pagination.pageIndex]);
+  }, [debouncedQuery, sortField, order, pagination.pageIndex, filters]);
 
   console.log("FETCH PARAMS:", params);
 
@@ -127,13 +135,40 @@ export const Table = () => {
 
   const maxPages = Math.min(data?.total_pages ?? 1, 500);
 
+  const [inputPage, setInputPage] = useState((pageIndex + 1).toString());
+
+  const handleGoToPage = () => {
+    const page = Number(inputPage);
+    if (!isNaN(page) && page >= 1 && page <= maxPages) {
+      table.setPageIndex(page - 1);
+    } else {
+      setInputPage((pageIndex + 1).toString());
+    }
+  };
+
+  useEffect(() => {
+    setInputPage((pageIndex + 1).toString());
+  }, [pageIndex]);
+
   return (
     <Wrapper>
       <Header>
-        <h1>Movies</h1>
-        <SearchFilter query={query} onQueryChange={setQuery} />
+        <h1>Explore our movie collection</h1>
+        <FilterContainer>
+          <Filters onClick={() => setIsSidebarOpen((prev) => !prev)} />
+          <SearchFilter query={query} onQueryChange={setQuery} />
+        </FilterContainer>
       </Header>
-
+      <SidebarFilter
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
+        selectedGenre={filters.genre}
+        selectedYear={filters.year}
+        onApply={(newFilters) => {
+          setFilters(newFilters);
+          setPagination((prev) => ({ ...prev, pageIndex: 0 }));
+        }}
+      />
       {isLoading ? (
         <LoaderWrapper>
           <ClipLoader color="#36d7b7" size={50} />
@@ -234,6 +269,23 @@ export const Table = () => {
           >
             <FaAngleDoubleRight />
           </button>
+          <GoToPageWrapper>
+            <span>
+              <label htmlFor="go-to-page">Go to page:</label>
+              <input
+                id="go-to-page"
+                type="number"
+                min={1}
+                max={maxPages}
+                value={inputPage}
+                onChange={(e) => setInputPage(e.target.value)}
+                onBlur={handleGoToPage}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") handleGoToPage();
+                }}
+              />
+            </span>
+          </GoToPageWrapper>
         </PaginationWrapper>
       )}
     </Wrapper>
