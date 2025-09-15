@@ -15,12 +15,10 @@ export const TableBody = ({ table }: Props) => {
         {table.getHeaderGroups().map((headerGroup) => (
           <tr key={headerGroup.id}>
             {headerGroup.headers.map((header) => (
-              <th key={header.id} className="users-table-cell">
+              <th key={header.id}>
                 <div
                   className={
-                    header.column.getCanSort()
-                      ? "cursor-pointer select-none"
-                      : ""
+                    header.column.getCanSort() ? "sortable-header" : ""
                   }
                   onClick={header.column.getToggleSortingHandler()}
                 >

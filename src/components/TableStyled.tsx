@@ -88,8 +88,9 @@ export const StyledTable = styled.table`
     background: #f3f7fa;
   }
 
-  .cursor-pointer {
+  .sortable-header {
     cursor: pointer;
+    user-select: none;
   }
 
   svg {
