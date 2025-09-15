@@ -52,7 +52,7 @@ export const Header = styled.div`
 export const StyledTable = styled.table`
   width: 100%;
   border-collapse: collapse;
-  background: white;
+  background: #f2e5cf;
 
   thead {
     background: #27323e;
@@ -65,7 +65,7 @@ export const StyledTable = styled.table`
   td {
     padding: 0.75rem 1rem;
     text-align: left;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid green;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -74,6 +74,7 @@ export const StyledTable = styled.table`
 
   th {
     user-select: none;
+    border-bottom: none;
   }
 
   th div {

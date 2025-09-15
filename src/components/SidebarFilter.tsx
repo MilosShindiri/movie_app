@@ -42,7 +42,7 @@ export const SidebarFilter = ({
   };
 
   return (
-    <SidebarWrapper isOpen={isOpen}>
+    <SidebarWrapper $isOpen={isOpen}>
       <SidebarHeader>
         <h2>Filters</h2>
         <button onClick={onClose}>

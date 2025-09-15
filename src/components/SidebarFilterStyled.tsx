@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-export const SidebarWrapper = styled.div<{ isOpen: boolean }>`
+export const SidebarWrapper = styled.div<{ $isOpen: boolean }>`
   position: fixed;
   top: 15%;
-  left: ${({ isOpen }) => (isOpen ? "0" : "-300px")};
+  left: ${({ $isOpen }) => ($isOpen ? "0" : "-300px")};
   width: 300px;
   background: #fff;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
