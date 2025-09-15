@@ -21,6 +21,8 @@ export interface MovieQueryParams {
   year?: number;
   query?: string;
   sortBy?: string;
+  staleTime?: number;
+  gcTime?: number;
 }
 
 export interface Genre {

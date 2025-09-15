@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { queryOptions } from "@tanstack/react-query";
 import { tmdbService } from "../services/api/tmdbService";
 import type { MovieQueryParams } from "../types/movies";
+import { minutesToMilliseconds } from "../utils/timeUtils";
 
 export const getMoviesOptions = (params: MovieQueryParams = {}) => {
   return queryOptions({
@@ -12,8 +13,8 @@ export const getMoviesOptions = (params: MovieQueryParams = {}) => {
       }
       return tmdbService.getPopularMovies(params);
     },
-    staleTime: 5 * 60 * 1000,
-    gcTime: 10 * 60 * 1000,
+    staleTime: minutesToMilliseconds(5),
+    gcTime: minutesToMilliseconds(10),
   });
 };
 
