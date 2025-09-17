@@ -2,7 +2,8 @@ export interface Movie {
   id: number;
   title: string;
   overview: string;
-  poster_path: string;
+  poster_path?: string;
+  backdrop_path?: string;
   release_date: string;
   genre_ids: number[];
   vote_average: number;
@@ -33,4 +34,16 @@ export interface Genre {
 export interface SearchFilterProps {
   query: string;
   onQueryChange: (value: string) => void;
+}
+
+export interface SimilarMovie {
+  id: number;
+  title: string;
+}
+
+export interface MovieDetailsProps {
+  movie: Movie;
+  similarMovies: SimilarMovie[];
+  loadingSimilar: boolean;
+  errorSimilar: Error | null;
 }
