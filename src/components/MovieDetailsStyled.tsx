@@ -47,7 +47,7 @@ export const DetailsData = styled.div`
   justify-content: flex-start;
   min-height: 100vh;
   padding-bottom: 20px;
-  overflow-x: hidden; /* Prevent horizontal scroll */
+  overflow-x: hidden;
 `;
 
 export const DetailsContentWrapper = styled.div`
@@ -83,7 +83,8 @@ export const DetailsRight = styled.div`
 `;
 
 export const PosterImage = styled.img`
-  width: 300px;
+  width: 100%;
+  max-width: 780px;
   border-radius: 10px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
 `;
@@ -242,6 +243,11 @@ export const MovieSliderItem = styled.div`
   padding: 10px;
   padding-bottom: 20px;
 
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
   img {
     border-radius: 10px;
     width: 180px;
@@ -268,4 +274,27 @@ export const MovieTitle = styled.p`
   text-overflow: ellipsis;
   max-width: 180px;
   margin: 0 auto;
+`;
+
+export const NoImagePlaceholder = styled.div`
+  width: 100%;
+  aspect-ratio: 2 / 3;
+
+  background-color: #333;
+  color: #aaa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  text-align: center;
+  border-radius: 10px;
+  margin: 0 auto;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-origin: center bottom;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+  }
 `;

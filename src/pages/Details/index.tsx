@@ -31,7 +31,7 @@ const DetailsPage = () => {
       toast.error("Error loading similar movies.");
     }
   }, [errorSimilar]);
-  console.log(movie);
+
   if (loadingDetails) return <TableLoader />;
   if (errorDetails) return null;
 

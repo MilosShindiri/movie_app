@@ -17,6 +17,7 @@ import {
   MovieSlider,
   MovieSliderItem,
   MovieTitle,
+  NoImagePlaceholder,
 } from "./MovieDetailsStyled";
 import { TableLoader } from "./TableLoader";
 import { useState } from "react";
@@ -26,6 +27,7 @@ import { IoMdClose } from "react-icons/io";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import { getImageUrl, ImageSizes } from "../utils/imageUtils";
 const settings = {
   dots: true,
   infinite: true,
@@ -59,7 +61,10 @@ const MovieDetails = ({
   loadingSimilar,
   errorSimilar,
 }: MovieDetailsProps) => {
-  const imageUrl = `https://image.tmdb.org/t/p/original${movie.backdrop_path}`;
+  const imageUrl = movie.backdrop_path
+    ? getImageUrl(movie.backdrop_path, ImageSizes.Original)
+    : "";
+
   const [showModal, setShowModal] = useState(false);
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
@@ -76,11 +81,13 @@ const MovieDetails = ({
       <DetailsData>
         <DetailsContentWrapper>
           <DetailsLeft>
-            {movie.poster_path && (
+            {movie.poster_path ? (
               <PosterImage
-                src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+                src={getImageUrl(movie.poster_path, ImageSizes.W300)}
                 alt={movie.title}
               />
+            ) : (
+              <NoImagePlaceholder>No image available</NoImagePlaceholder>
             )}
           </DetailsLeft>
 
@@ -112,20 +119,24 @@ const MovieDetails = ({
 
         <MovieSlider>
           <Slider {...settings}>
-            {similarMovies.map((m) => (
-              <MovieSliderItem key={m.id}>
-                <a href={`/movie/${m.id}`}>
-                  <img
-                    src={`https://image.tmdb.org/t/p/w300${m.poster_path}`}
-                    alt={m.title}
-                    style={{
-                      width: "100%",
-                      borderRadius: "10px",
-                      boxShadow: "0 5px 15px rgba(0, 0, 0, 0.5)",
-                    }}
-                  />
+            {similarMovies.map((movie) => (
+              <MovieSliderItem key={movie.id}>
+                <a href={`/movie/${movie.id}`}>
+                  {movie.poster_path ? (
+                    <img
+                      src={getImageUrl(movie.poster_path, ImageSizes.W300)}
+                      alt={movie.title}
+                      style={{
+                        width: "100%",
+                        borderRadius: "10px",
+                        boxShadow: "0 5px 15px rgba(0, 0, 0, 0.5)",
+                      }}
+                    />
+                  ) : (
+                    <NoImagePlaceholder>No image</NoImagePlaceholder>
+                  )}
                 </a>
-                <MovieTitle>{m.title}</MovieTitle>
+                <MovieTitle>{movie.title}</MovieTitle>
               </MovieSliderItem>
             ))}
           </Slider>
