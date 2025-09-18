@@ -39,6 +39,7 @@ export interface SearchFilterProps {
 export interface SimilarMovie {
   id: number;
   title: string;
+  poster_path?: string;
 }
 
 export interface MovieDetailsProps {

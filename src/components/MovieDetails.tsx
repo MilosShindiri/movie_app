@@ -7,7 +7,6 @@ import {
   PosterImage,
   SectionTitle,
   InfoParagraph,
-  SimilarList,
   DetailsContentWrapper,
   DetailsLeft,
   DetailsRight,
@@ -15,12 +14,44 @@ import {
   ModalOverlay,
   ModalContent,
   CloseButton,
+  MovieSlider,
+  MovieSliderItem,
+  MovieTitle,
 } from "./MovieDetailsStyled";
 import { TableLoader } from "./TableLoader";
 import { useState } from "react";
 import EmbedPlayer from "./EmbedPlayer";
 import { useEscapeKey } from "../hooks/useEscapeKey";
 import { IoMdClose } from "react-icons/io";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+const settings = {
+  dots: true,
+  infinite: true,
+  slidesToShow: 3,
+  slidesToScroll: 3,
+  speed: 2000,
+  arrows: true,
+  autoplay: false,
+  cssEase: "ease-in-out",
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2,
+      },
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      },
+    },
+  ],
+};
 
 const MovieDetails = ({
   movie,
@@ -79,11 +110,26 @@ const MovieDetails = ({
         {loadingSimilar && <TableLoader />}
         {errorSimilar && <p>Error loading similar movies.</p>}
 
-        <SimilarList>
-          {similarMovies.map((m) => (
-            <li key={m.id}>{m.title}</li>
-          ))}
-        </SimilarList>
+        <MovieSlider>
+          <Slider {...settings}>
+            {similarMovies.map((m) => (
+              <MovieSliderItem key={m.id}>
+                <a href={`/movie/${m.id}`}>
+                  <img
+                    src={`https://image.tmdb.org/t/p/w300${m.poster_path}`}
+                    alt={m.title}
+                    style={{
+                      width: "100%",
+                      borderRadius: "10px",
+                      boxShadow: "0 5px 15px rgba(0, 0, 0, 0.5)",
+                    }}
+                  />
+                </a>
+                <MovieTitle>{m.title}</MovieTitle>
+              </MovieSliderItem>
+            ))}
+          </Slider>
+        </MovieSlider>
       </DetailsData>
       {showModal && (
         <ModalOverlay onClick={closeModal}>

@@ -24,8 +24,8 @@ const EmbedPlayer = ({ movieId }: EmbedPlayerProps) => {
 
   return hasError ? (
     <FallbackMessage>
-      <BiError /> Player nije uspeo da se učita. Pokušaj ponovo kasnije ili
-      proveri konekciju.
+      <BiError />
+      The player did not load. Please try again later or check your connection.
     </FallbackMessage>
   ) : (
     <StyledIframe

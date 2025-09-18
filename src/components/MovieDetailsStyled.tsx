@@ -46,19 +46,8 @@ export const DetailsData = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   min-height: 100vh;
-  overflow: auto;
   padding-bottom: 20px;
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(15px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+  overflow-x: hidden; /* Prevent horizontal scroll */
 `;
 
 export const DetailsContentWrapper = styled.div`
@@ -88,7 +77,6 @@ export const DetailsRight = styled.div`
   padding-top: 0.5rem;
   position: relative;
   gap: 1rem;
-
   & > div:last-child {
     margin-top: 110px;
   }
@@ -106,6 +94,10 @@ export const SectionTitle = styled.h2`
   font-size: 2rem;
   font-weight: bold;
   color: #ffcc00;
+  text-align: center;
+  border-bottom: 2px solid #ffcc00;
+  display: inline-block;
+  padding-bottom: 5px;
 `;
 
 export const InfoParagraph = styled.p`
@@ -119,20 +111,8 @@ export const InfoParagraph = styled.p`
     font-size: 1.1rem;
   }
 
-  /* Postavi fiksnu visinu i omogući scroll ako je tekst duži */
-  min-height: 20px; /* Fiksiraj visinu */
-  max-height: 20px; /* Ista visina za sve opise */
-`;
-
-export const SimilarList = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: flex-start;
-  padding-bottom: 20px;
+  min-height: 20px;
+  max-height: 20px;
 `;
 
 export const PlayButton = styled.button`
@@ -205,4 +185,87 @@ export const CloseButton = styled.button`
   &:hover {
     color: #ffcc00;
   }
+`;
+
+export const MovieSlider = styled.div`
+  margin-bottom: 20px;
+  padding: 0 50px 40px;
+  position: relative;
+
+  .slick-dots {
+    bottom: -25px;
+    li button:before {
+      color: #ffcc00;
+      font-size: 12px;
+    }
+    li.slick-active button:before {
+      color: #00bcd4;
+    }
+  }
+
+  .slick-prev,
+  .slick-next {
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #00bcd4;
+    transition: color 0.3s ease, transform 0.2s ease;
+
+    &:before {
+      font-size: 40px;
+      color: #00bcd4;
+    }
+
+    &:hover:before {
+      color: #ffcc00;
+    }
+  }
+
+  .slick-prev {
+    left: -45px;
+  }
+
+  .slick-next {
+    right: -45px;
+  }
+`;
+
+export const MovieSliderItem = styled.div`
+  text-align: center;
+  padding: 10px;
+  padding-bottom: 20px;
+
+  img {
+    border-radius: 10px;
+    width: 180px;
+    height: auto;
+    margin: 0 auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform-origin: center bottom;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    }
+  }
+`;
+
+export const MovieTitle = styled.p`
+  margin-top: 10px;
+  font-size: 0.95rem;
+  color: #ffcc00;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px;
+  margin: 0 auto;
 `;
