@@ -3,12 +3,15 @@ import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa";
 import { StyledTable } from "./TableStyled";
 import type { Table as TanstackTable } from "@tanstack/react-table";
 import type { Movie } from "../types/movies";
+import { useNavigate } from "react-router-dom";
+import { PagePaths } from "../routes/routes_utils";
 
 interface Props {
   table: TanstackTable<Movie>;
 }
 
 export const TableBody = ({ table }: Props) => {
+  const navigate = useNavigate();
   return (
     <StyledTable>
       <thead>
@@ -42,7 +45,14 @@ export const TableBody = ({ table }: Props) => {
       </thead>
       <tbody>
         {table.getRowModel().rows.map((row) => (
-          <tr key={row.id}>
+          <tr
+            key={row.id}
+            onClick={() => {
+              const movieId = row.original.id;
+              navigate(PagePaths.DETAILS.replace(":id", String(movieId)));
+            }}
+            style={{ cursor: "pointer" }}
+          >
             {row.getVisibleCells().map((cell) => (
               <td key={cell.id}>
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}

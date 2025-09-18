@@ -28,4 +28,10 @@ export const tmdbService = {
       .then((res) => res.data),
 
   getGenres: () => apiClient.get(URLS_API.GET_GENRES).then((res) => res.data),
+
+  getMovieDetails: (id: number | string) =>
+    apiClient.get(URLS_API.GET_MOVIE_DETAILS(id)).then((res) => res.data),
+
+  getSimilarMovies: (id: number | string) =>
+    apiClient.get(URLS_API.GET_SIMILAR_MOVIES(id)).then((res) => res.data),
 };

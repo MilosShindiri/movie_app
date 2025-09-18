@@ -24,6 +24,24 @@ export const getGenresOptions = () =>
     queryFn: tmdbService.getGenres,
   });
 
+export const getMovieDetailsOptions = (id: number | string) =>
+  queryOptions({
+    queryKey: ["movie-details", id],
+    queryFn: () => tmdbService.getMovieDetails(id),
+  });
+
+export const useMovieDetails = (id: number | string) =>
+  useQuery(getMovieDetailsOptions(id));
+
+export const getSimilarMoviesOptions = (id: number | string) =>
+  queryOptions({
+    queryKey: ["similar-movies", id],
+    queryFn: () => tmdbService.getSimilarMovies(id),
+  });
+
+export const useSimilarMovies = (id: number | string) =>
+  useQuery(getSimilarMoviesOptions(id));
+
 export const usePopularMovies = (params: MovieQueryParams = {}) =>
   useQuery(getMoviesOptions(params));
 
