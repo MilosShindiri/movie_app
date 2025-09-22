@@ -1,23 +1,7 @@
 import { useState } from "react";
 import { BiError } from "react-icons/bi";
-import styled from "styled-components";
-
-interface EmbedPlayerProps {
-  movieId: number;
-}
-
-const FallbackMessage = styled.p`
-  color: #ffcc00;
-  text-align: center;
-  padding: 1rem;
-  font-size: 1rem;
-`;
-
-const StyledIframe = styled.iframe`
-  width: 100%;
-  height: 100%;
-  border: none;
-`;
+import type { EmbedPlayerProps } from "../types/embededplayer";
+import { FallbackMessage, StyledIframe } from "./EmbedPlayerStyled";
 
 const EmbedPlayer = ({ movieId }: EmbedPlayerProps) => {
   const [hasError, setHasError] = useState(false);

@@ -18,4 +18,9 @@ input[type=number]::-webkit-inner-spin-button {
     background-color: #120c28;
     color: white;
   }
+    .recharts-wrapper *:focus,
+  .recharts-wrapper *:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+  }
 `;
