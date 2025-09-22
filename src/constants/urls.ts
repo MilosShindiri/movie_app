@@ -4,4 +4,6 @@ export const URLS_API = {
   GET_SEARCH: "/search/movie",
   GET_MOVIE_DETAILS: (id: number | string) => `/movie/${id}`,
   GET_SIMILAR_MOVIES: (id: number | string) => `/movie/${id}/similar`,
+  GET_TRENDING_MOVIES: (timeWindow: "day" | "week" = "day") =>
+    `/trending/movie/${timeWindow}`,
 } as const;

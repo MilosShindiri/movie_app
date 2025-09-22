@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { queryOptions } from "@tanstack/react-query";
 import { tmdbService } from "../services/api/tmdbService";
-import type { MovieQueryParams } from "../types/movies";
+import type { Movie, MovieQueryParams } from "../types/movies";
 import { minutesToMilliseconds } from "../utils/timeUtils";
 
 export const getMoviesOptions = (params: MovieQueryParams = {}) => {
@@ -46,3 +46,19 @@ export const usePopularMovies = (params: MovieQueryParams = {}) =>
   useQuery(getMoviesOptions(params));
 
 export const useGenres = () => useQuery(getGenresOptions());
+
+export const useTrendingMoviesAll = (timeWindow: "day" | "week" = "day") =>
+  useQuery<Movie[]>({
+    queryKey: ["trending-movies-all", timeWindow],
+    queryFn: () => tmdbService.getTrendingMultiplePages(timeWindow),
+    staleTime: minutesToMilliseconds(10),
+    gcTime: minutesToMilliseconds(20),
+  });
+
+export const useTopMovies = (daysAgo: number = 7) =>
+  useQuery<Movie[]>({
+    queryKey: ["top-movies", daysAgo],
+    queryFn: () => tmdbService.getTopMoviesByPopularity(daysAgo),
+    staleTime: minutesToMilliseconds(10),
+    gcTime: minutesToMilliseconds(20),
+  });

@@ -7,6 +7,9 @@ export interface Movie {
   release_date: string;
   genre_ids: number[];
   vote_average: number;
+  popularity: number;
+  name: string;
+  vote_count: number;
 }
 
 export interface MoviesResponse {
@@ -47,4 +50,28 @@ export interface MovieDetailsProps {
   similarMovies: SimilarMovie[];
   loadingSimilar: boolean;
   errorSimilar: Error | null;
+}
+
+export interface YearPopularity {
+  year: string;
+  avgPopularity: number;
+}
+
+export type SimpleMovie = Pick<
+  Movie,
+  "release_date" | "popularity" | "genre_ids"
+>;
+
+export type TooltipPayload = {
+  payload: {
+    name: string;
+    popularity: number;
+    rating: number;
+    votes: number;
+  };
+};
+export interface CustomTooltipProps {
+  active?: boolean;
+  payload?: TooltipPayload[];
+  label?: string;
 }
