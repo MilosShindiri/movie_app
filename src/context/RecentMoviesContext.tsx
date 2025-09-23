@@ -24,7 +24,6 @@ export const MovieHistoryWidgetProvider = ({
   useEffect(() => {
     if (isLoaded) {
       localStorage.setItem("movieHistory", JSON.stringify(movieHistory));
-      console.log("Saved history to localStorage:", movieHistory);
     }
   }, [isLoaded, movieHistory]);
 
