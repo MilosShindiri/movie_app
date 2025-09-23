@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routes/Routes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { MovieHistoryWidgetProvider } from "./context/RecentMoviesContext";
 
 const queryClient = new QueryClient();
 
@@ -13,7 +14,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <MovieHistoryWidgetProvider>
+        <RouterProvider router={router} />
+      </MovieHistoryWidgetProvider>
     </QueryClientProvider>
   </React.StrictMode>
 );
