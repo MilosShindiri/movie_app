@@ -163,3 +163,10 @@ export const MoviePoster = styled.div`
     border-radius: 4px;
   }
 `;
+
+export const EmptyMessage = styled.p`
+  padding: 1rem;
+  text-align: center;
+  color: #999;
+  font-style: italic;
+`;

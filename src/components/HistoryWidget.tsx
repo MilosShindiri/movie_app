@@ -2,6 +2,7 @@ import { FaHistory } from "react-icons/fa";
 import { useWidget } from "../hooks/useWidget";
 import {
   CloseButton,
+  EmptyMessage,
   HistoryContent,
   HistoryHeader,
   HistoryItem,
@@ -44,19 +45,23 @@ export const HistoryWidget: FC = () => {
             </HistoryHeader>
 
             <HistoryContent>
-              {movieHistory.map((movie) => (
-                <HistoryItem
-                  key={movie.id}
-                  onClick={() => handleMovieClick(movie.id)}
-                >
-                  <MovieInfo>
-                    <MovieTitle>{movie.title}</MovieTitle>
-                  </MovieInfo>
-                  <MoviePoster>
-                    <img src={movie.poster} alt={movie.title} />
-                  </MoviePoster>
-                </HistoryItem>
-              ))}
+              {movieHistory.length === 0 ? (
+                <EmptyMessage>No items added</EmptyMessage>
+              ) : (
+                movieHistory.map((movie) => (
+                  <HistoryItem
+                    key={movie.id}
+                    onClick={() => handleMovieClick(movie.id)}
+                  >
+                    <MovieInfo>
+                      <MovieTitle>{movie.title}</MovieTitle>
+                    </MovieInfo>
+                    <MoviePoster>
+                      <img src={movie.poster} alt={movie.title} />
+                    </MoviePoster>
+                  </HistoryItem>
+                ))
+              )}
             </HistoryContent>
           </HistoryPanel>
         )}
