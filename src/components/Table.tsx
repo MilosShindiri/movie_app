@@ -6,7 +6,6 @@ import {
   createColumnHelper,
 } from "@tanstack/react-table";
 import type { Movie } from "../types/movies";
-
 import { Wrapper } from "./TableStyled";
 import { SidebarFilter } from "./SidebarFilter";
 import { TableHeader } from "./TableHeader";
