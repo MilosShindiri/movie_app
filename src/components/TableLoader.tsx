@@ -1,5 +1,5 @@
 import { ClipLoader } from "react-spinners";
-import { LoaderWrapper } from "./TableStyled";
+import { LoaderWrapper } from "./Table/TableStyled";
 
 export const TableLoader = () => (
   <LoaderWrapper>

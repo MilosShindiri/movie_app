@@ -5,19 +5,19 @@ import {
   getPaginationRowModel,
   createColumnHelper,
 } from "@tanstack/react-table";
-import type { Movie } from "../types/movies";
+import { useTableState } from "../../hooks/useTableState";
+import { useNavigate } from "react-router-dom";
+import { useTableParams } from "../../hooks/useTableParams";
+import { useMoviesTable } from "../../hooks/useMoviesTable";
+import type { Movie } from "../../types/movies";
+import { movieDetailsPath } from "../../utils/pathUtils";
 import { Wrapper } from "./TableStyled";
-import { SidebarFilter } from "./SidebarFilter";
 import { TableHeader } from "./TableHeader";
+
+import { TableLoader } from "../TableLoader";
 import { TableBody } from "./TableBody";
 import { TablePagination } from "./TablePagination";
-import { TableLoader } from "./TableLoader";
-
-import { useTableState } from "../hooks/useTableState";
-import { useTableParams } from "../hooks/useTableParams";
-import { useMoviesTable } from "../hooks/useMoviesTable";
-import { useNavigate } from "react-router-dom";
-import { movieDetailsPath } from "../utils/pathUtils";
+import { SidebarFilter } from "../Filters/SidebarFilter";
 
 export const Table = () => {
   const {

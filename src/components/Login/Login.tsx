@@ -1,8 +1,8 @@
 import { type FC } from "react";
-import { FormContainer, StyledForm, StyledButton } from "./LoginStyled";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { useAuth } from "../context/useAuth";
-import { FormInput } from "../components/FormInput";
+import { useAuth } from "../../context/useAuth";
+import { FormContainer, StyledButton, StyledForm } from "./LoginStyled";
+import { FormInput } from "../FormInput";
 
 export interface IFormInput {
   username: string;

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { Table } from "../../components/Table";
 import { useBreadcrumbs } from "../../context/useBreadcrumbs";
+import { Table } from "../../components/Table/Table";
 
 const TablePage = () => {
   const { setItems } = useBreadcrumbs();

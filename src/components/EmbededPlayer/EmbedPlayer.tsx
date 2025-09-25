@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BiError } from "react-icons/bi";
-import type { EmbedPlayerProps } from "../types/embededplayer";
+import type { EmbedPlayerProps } from "../../types/embededplayer";
 import { FallbackMessage, StyledIframe } from "./EmbedPlayerStyled";
 
 const EmbedPlayer = ({ movieId }: EmbedPlayerProps) => {

@@ -4,7 +4,6 @@ import {
   FaChevronLeft,
   FaChevronRight,
 } from "react-icons/fa";
-
 import { useState, useEffect } from "react";
 import { GoToPageWrapper, PaginationWrapper } from "./TableStyled";
 

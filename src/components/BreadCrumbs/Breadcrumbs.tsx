@@ -1,4 +1,4 @@
-import { useBreadcrumbs } from "../context/useBreadcrumbs";
+import { useBreadcrumbs } from "../../context/useBreadcrumbs";
 import {
   CrumbCurrent,
   CrumbLink,

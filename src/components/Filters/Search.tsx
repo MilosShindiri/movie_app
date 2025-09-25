@@ -1,5 +1,5 @@
-import type { SearchFilterProps } from "../types/movies";
-import { FilterWrapper } from "./TableStyled";
+import type { SearchFilterProps } from "../../types/movies";
+import { FilterWrapper } from "../Table/TableStyled";
 
 export const SearchFilter = ({ query, onQueryChange }: SearchFilterProps) => {
   return (

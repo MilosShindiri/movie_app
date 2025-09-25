@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useBreadcrumbs } from "../../context/useBreadcrumbs";
-import NowPlayingMovies from "../../components/Home";
-import Footer from "../../components/HomeFooter";
+import NowPlayingMovies from "../../components/Home/Home";
+import Footer from "../../components/Home/HomeFooter";
 
 const HomePage = () => {
   const { setItems } = useBreadcrumbs();

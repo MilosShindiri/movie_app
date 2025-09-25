@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useMovieDetails, useSimilarMovies } from "../../queries/movies";
-import MovieDetails from "../../components/MovieDetails";
+import MovieDetails from "../../components/MovieDetails/MovieDetails";
 import { TableLoader } from "../../components/TableLoader";
 import { toast } from "react-toastify";
 import { useMovieHistory } from "../../context/useHistoryContext";

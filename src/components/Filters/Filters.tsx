@@ -1,5 +1,5 @@
 import { FaSlidersH } from "react-icons/fa";
-import { FilterButton } from "./TableStyled";
+import { FilterButton } from "../Table/TableStyled";
 
 interface FiltersProps {
   onClick: () => void;

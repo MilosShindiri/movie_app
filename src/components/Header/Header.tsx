@@ -10,10 +10,10 @@ import {
   StyledRightLink,
   StyledLogout,
 } from "./Header.styled";
-import { useAuth } from "../context/useAuth";
+import { useAuth } from "../../context/useAuth";
 import type { FC } from "react";
 import { toast } from "react-toastify";
-import { PagePaths } from "../routes/routes_utils";
+import { PagePaths } from "../../routes/routes_utils";
 
 export const Header: FC = () => {
   const { isAuthenticated, logout } = useAuth();

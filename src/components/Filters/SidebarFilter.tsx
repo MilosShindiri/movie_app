@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { useGenres } from "../queries/movies";
-import type { Genre } from "../types/movies";
+import { IoMdClose } from "react-icons/io";
+import { useGenres } from "../../queries/movies";
+import type { Genre } from "../../types/movies";
 import {
   SidebarFooter,
   SidebarHeader,
   SidebarSection,
   SidebarWrapper,
 } from "./SidebarFilterStyled";
-import { IoMdClose } from "react-icons/io";
 
 interface Props {
   isOpen: boolean;

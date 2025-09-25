@@ -3,13 +3,13 @@ import {
   StyledLabel,
   InputWrapper,
   TogglePasswordButton,
-} from "./LoginStyled";
+} from "./Login/LoginStyled";
 import type { FC } from "react";
 import { useState } from "react";
 import type { FieldError, UseFormRegisterReturn } from "react-hook-form";
 import { FaLock, FaUnlock } from "react-icons/fa";
 import { FaExclamationCircle } from "react-icons/fa";
-import { ErrorText } from "./LoginStyled";
+import { ErrorText } from "./Login/LoginStyled";
 
 interface FormInputProps {
   label: string;
