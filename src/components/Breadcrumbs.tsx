@@ -1,39 +1,36 @@
-import { Link, useLocation } from "react-router-dom";
+import { useBreadcrumbs } from "../context/useBreadcrumbs";
 import {
-  BreadcrumbWrapper,
-  Crumb,
-  CrumbWrapper,
-  SlashLine,
-  TitleStyled,
+  CrumbCurrent,
+  CrumbLink,
+  List,
+  ListItem,
+  Nav,
 } from "./BreadcrumbsStyled";
 
-export const Breadcrumbs = () => {
-  const location = useLocation();
-  const pathnames = location.pathname.split("/").filter((x) => x);
+const Breadcrumbs = () => {
+  const { items } = useBreadcrumbs();
+
+  if (!items || items.length === 0) return null;
 
   return (
-    <BreadcrumbWrapper>
-      <CrumbWrapper>
-        <Crumb>
-          <Link to="/">Home</Link>
-        </Crumb>
-      </CrumbWrapper>
-      {pathnames.map((value, index) => {
-        const last = index === pathnames.length - 1;
-        const to = `/${pathnames.slice(0, index + 1).join("/")}`;
-        const title = value;
+    <Nav aria-label="breadcrumb">
+      <List>
+        {items.map((item, index) => {
+          const isLast = index === items.length - 1;
 
-        return (
-          <Crumb key={to}>
-            <SlashLine>/</SlashLine>
-            {last ? (
-              <TitleStyled>{title}</TitleStyled>
-            ) : (
-              <Link to={to}>{title}</Link>
-            )}
-          </Crumb>
-        );
-      })}
-    </BreadcrumbWrapper>
+          return (
+            <ListItem key={index}>
+              {isLast || !item.url ? (
+                <CrumbCurrent>{item.label}</CrumbCurrent>
+              ) : (
+                <CrumbLink to={item.url}>{item.label}</CrumbLink>
+              )}
+            </ListItem>
+          );
+        })}
+      </List>
+    </Nav>
   );
 };
+
+export default Breadcrumbs;

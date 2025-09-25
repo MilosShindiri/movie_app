@@ -6,9 +6,11 @@ import { TableLoader } from "../../components/TableLoader";
 import { toast } from "react-toastify";
 import { useMovieHistory } from "../../context/useHistoryContext";
 import { getImageUrl, ImageSizes } from "../../utils/imageUtils";
+import { useBreadcrumbs } from "../../context/useBreadcrumbs";
 
 const DetailsPage = () => {
   const { id } = useParams<{ id: string }>();
+  const { setItems } = useBreadcrumbs();
 
   const {
     data: movie,
@@ -24,6 +26,16 @@ const DetailsPage = () => {
 
   const { addToHistory } = useMovieHistory();
   const addToHistoryRef = useRef(addToHistory);
+
+  useEffect(() => {
+    if (movie) {
+      setItems([
+        { label: "Home", url: "/" },
+        { label: "Table", url: "/table" },
+        { label: movie.title, url: null },
+      ]);
+    }
+  }, [movie, setItems]);
 
   useEffect(() => {
     addToHistoryRef.current = addToHistory;
@@ -52,7 +64,7 @@ const DetailsPage = () => {
   }, [errorSimilar]);
 
   if (loadingDetails) return <TableLoader />;
-  if (errorDetails) return null;
+  if (errorDetails || !movie) return null;
 
   return (
     <MovieDetails

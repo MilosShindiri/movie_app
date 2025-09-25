@@ -4,6 +4,7 @@ import { RouterProvider } from "react-router-dom";
 import { router } from "./routes/Routes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MovieHistoryWidgetProvider } from "./context/RecentMoviesContext";
+import { BreadcrumbsProvider } from "./context/BreadcrumbsContextProvider";
 
 const queryClient = new QueryClient();
 
@@ -15,7 +16,9 @@ root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <MovieHistoryWidgetProvider>
-        <RouterProvider router={router} />
+        <BreadcrumbsProvider>
+          <RouterProvider router={router} />
+        </BreadcrumbsProvider>
       </MovieHistoryWidgetProvider>
     </QueryClientProvider>
   </React.StrictMode>

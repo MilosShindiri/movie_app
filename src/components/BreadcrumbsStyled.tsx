@@ -1,27 +1,37 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const BreadcrumbWrapper = styled.nav`
-  padding: 1rem;
-  font-size: 14px;
-  background: #f4f4f4;
+export const Nav = styled.nav`
+  padding: 16px;
 `;
 
-export const CrumbWrapper = styled.ul`
+export const List = styled.ol`
   display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 `;
 
-export const Crumb = styled.li`
-  &:hover {
-    text-decoration: underline;
-    color: #1d4ed8;
+export const ListItem = styled.li`
+  display: flex;
+  align-items: center;
+
+  &:not(:last-child)::after {
+    content: "/";
+    margin: 0 8px;
+    color: #aaa;
   }
 `;
 
-export const SlashLine = styled.span`
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
+export const CrumbLink = styled(Link)`
+  text-decoration: none;
+  color: #007bff;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
-export const TitleStyled = styled.span`
-  color: #374151;
+export const CrumbCurrent = styled.span`
+  color: #6c757d;
 `;
