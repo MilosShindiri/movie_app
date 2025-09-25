@@ -1,5 +1,5 @@
 import { FaRegPlayCircle } from "react-icons/fa";
-import type { MovieDetailsProps } from "../types/movies";
+import type { MovieDetailsProps } from "../../types/movies";
 import {
   DetailsBackground,
   DetailsData,
@@ -19,15 +19,16 @@ import {
   MovieTitle,
   NoImagePlaceholder,
 } from "./MovieDetailsStyled";
-import { TableLoader } from "./TableLoader";
+import { TableLoader } from "../TableLoader";
 import { useState } from "react";
-import EmbedPlayer from "./EmbedPlayer";
-import { useEscapeKey } from "../hooks/useEscapeKey";
+
+import { useEscapeKey } from "../../hooks/useEscapeKey";
 import { IoMdClose } from "react-icons/io";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { getImageUrl, ImageSizes } from "../utils/imageUtils";
+import { getImageUrl, ImageSizes } from "../../utils/imageUtils";
+import EmbedPlayer from "../EmbededPlayer/EmbedPlayer";
 const settings = {
   dots: true,
   infinite: true,

@@ -1,8 +1,8 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../../context/useAuth";
-import { Login } from "../../components/Login";
 import { PagePaths } from "../../routes/routes_utils";
 import { useEffect } from "react";
+import { Login } from "../../components/Login/Login";
 
 const LoginPage = () => {
   const { isAuthenticated, didLogout, setDidLogout } = useAuth();

@@ -1,5 +1,8 @@
 import { FaHistory } from "react-icons/fa";
-import { useWidget } from "../hooks/useWidget";
+import type { FC } from "react";
+import { IoMdClose } from "react-icons/io";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { useWidget } from "../../hooks/useWidget";
 import {
   CloseButton,
   EmptyMessage,
@@ -12,9 +15,6 @@ import {
   MovieTitle,
   WidgetContainer,
 } from "./HistoryWidgetStyled";
-import type { FC } from "react";
-import { IoMdClose } from "react-icons/io";
-import { RiDeleteBin6Line } from "react-icons/ri";
 
 export const HistoryWidget: FC = () => {
   const {

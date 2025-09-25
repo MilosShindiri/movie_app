@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { useNowPlayingMovies } from "../queries/movies";
-import type { Movie } from "../types/movies";
-import { getImageUrl, ImageSizes } from "../utils/imageUtils";
+import { useNowPlayingMovies } from "../../queries/movies";
+import type { Movie } from "../../types/movies";
+import { getImageUrl, ImageSizes } from "../../utils/imageUtils";
 import { Card, Grid, Info, Poster, Rating, Title } from "./HomeStyled";
-import { TableLoader } from "./TableLoader";
+import { TableLoader } from "../TableLoader";
 
 const NowPlayingMovies = () => {
   const { data, isLoading, isError } = useNowPlayingMovies();

@@ -1,6 +1,6 @@
 export type BreadcrumbItem = {
   label: string;
-  url?: string;
+  url?: string | null;
 };
 
 export type BreadcrumbsContextType = {

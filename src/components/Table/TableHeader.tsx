@@ -1,5 +1,5 @@
-import { Filters } from "./Filters";
-import { SearchFilter } from "./Search";
+import { Filters } from "../Filters/Filters";
+import { SearchFilter } from "../Filters/Search";
 import { FilterContainer, Header } from "./TableStyled";
 
 interface Props {

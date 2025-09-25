@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
-import { Header } from "../components/Header";
-import { HistoryWidget } from "../components/HistoryWidget";
-import Breadcrumbs from "../components/Breadcrumbs";
+import { Header } from "../components/Header/Header";
+import Breadcrumbs from "../components/BreadCrumbs/Breadcrumbs";
+import { HistoryWidget } from "../components/HistoryWidget/HistoryWidget";
 
 export const AppLayout = () => {
   return (

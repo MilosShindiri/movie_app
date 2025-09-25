@@ -2,9 +2,9 @@ import { flexRender } from "@tanstack/react-table";
 import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa";
 import { StyledTable } from "./TableStyled";
 import type { Table as TanstackTable } from "@tanstack/react-table";
-import type { Movie } from "../types/movies";
+import type { Movie } from "../../types/movies";
 import { useNavigate } from "react-router-dom";
-import { PagePaths } from "../routes/routes_utils";
+import { PagePaths } from "../../routes/routes_utils";
 
 interface Props {
   table: TanstackTable<Movie>;
