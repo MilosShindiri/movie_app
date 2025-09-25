@@ -23,6 +23,7 @@ interface TableProps {
   initialPageIndex: number;
   setSearchParams: SetURLSearchParams;
 }
+
 export const Table = ({ initialPageIndex, setSearchParams }: TableProps) => {
   const {
     query,
@@ -124,6 +125,8 @@ export const Table = ({ initialPageIndex, setSearchParams }: TableProps) => {
     toast.error("Error loading movies.");
   }
 
+  const closeSidebar = () => setIsSidebarOpen(false);
+
   return (
     <Wrapper>
       <TableHeader
@@ -140,6 +143,7 @@ export const Table = ({ initialPageIndex, setSearchParams }: TableProps) => {
         onApply={(newFilters) => {
           setFilters(newFilters);
           setPagination((prev) => ({ ...prev, pageIndex: 0 }));
+          closeSidebar();
         }}
       />
 
