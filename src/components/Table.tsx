@@ -16,6 +16,8 @@ import { TableLoader } from "./TableLoader";
 import { useTableState } from "../hooks/useTableState";
 import { useTableParams } from "../hooks/useTableParams";
 import { useMoviesTable } from "../hooks/useMoviesTable";
+import { useNavigate } from "react-router-dom";
+import { movieDetailsPath } from "../utils/pathutils";
 
 export const Table = () => {
   const {
@@ -30,7 +32,7 @@ export const Table = () => {
     pagination,
     setPagination,
   } = useTableState();
-
+  const navigate = useNavigate();
   const order = sorting[0]?.desc ? "desc" : "asc";
   const sort = sorting[0]?.id ?? "";
 
@@ -55,7 +57,21 @@ export const Table = () => {
         const title = info.getValue();
         const shortTitle =
           title.length > 50 ? title.slice(0, 50) + "..." : title;
-        return <span title={title}>{shortTitle}</span>;
+        const movieId = info.row.original.id;
+        return (
+          <span
+            onClick={() =>
+              navigate(movieDetailsPath(movieId), {
+                state: {
+                  from: "table",
+                  title: title,
+                },
+              })
+            }
+          >
+            {shortTitle}
+          </span>
+        );
       },
     }),
     columnHelper.accessor("release_date", {

@@ -33,6 +33,9 @@ export const tmdbService = {
 
   getGenres: () => apiClient.get(URLS_API.GET_GENRES).then((res) => res.data),
 
+  getNowPlaying: () =>
+    apiClient.get(URLS_API.GET_NOW_PLAYING).then((res) => res.data),
+
   getMovieDetails: (id: number | string) =>
     apiClient.get(URLS_API.GET_MOVIE_DETAILS(id)).then((res) => res.data),
 

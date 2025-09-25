@@ -4,7 +4,6 @@ import { AuthProvider } from "./context/AuthContext";
 import { ToastContainer } from "react-toastify";
 
 export default function App() {
-  // here potencialy goes breadcrumps ref:https://www.youtube.com/watch?v=h7MTWLv3xvw
   return (
     <AuthProvider>
       <GlobalStyle />
