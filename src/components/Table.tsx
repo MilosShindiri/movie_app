@@ -17,6 +17,7 @@ import { useTableState } from "../hooks/useTableState";
 import { useTableParams } from "../hooks/useTableParams";
 import { useMoviesTable } from "../hooks/useMoviesTable";
 import { useNavigate } from "react-router-dom";
+import { movieDetailsPath } from "../utils/pathutils";
 
 export const Table = () => {
   const {
@@ -60,7 +61,7 @@ export const Table = () => {
         return (
           <span
             onClick={() =>
-              navigate(`movie/${movieId}`, {
+              navigate(movieDetailsPath(movieId), {
                 state: {
                   from: "table",
                   title: title,
