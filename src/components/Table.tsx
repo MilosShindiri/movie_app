@@ -17,7 +17,7 @@ import { useTableState } from "../hooks/useTableState";
 import { useTableParams } from "../hooks/useTableParams";
 import { useMoviesTable } from "../hooks/useMoviesTable";
 import { useNavigate } from "react-router-dom";
-import { movieDetailsPath } from "../utils/pathutils";
+import { movieDetailsPath } from "../utils/pathUtils";
 
 export const Table = () => {
   const {
