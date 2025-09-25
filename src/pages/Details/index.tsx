@@ -31,7 +31,7 @@ const DetailsPage = () => {
     if (movie) {
       setItems([
         { label: "Home", url: "/" },
-        { label: "Table", url: "/table" },
+        { label: "Movie", url: null },
         { label: movie.title, url: null },
       ]);
     }

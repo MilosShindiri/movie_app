@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { useBreadcrumbs } from "../../context/useBreadcrumbs";
+import NowPlayingMovies from "../../components/Home";
+import Footer from "../../components/HomeFooter";
 
 const HomePage = () => {
   const { setItems } = useBreadcrumbs();
@@ -7,11 +9,11 @@ const HomePage = () => {
   useEffect(() => {
     setItems([{ label: "", url: "/" }]);
   }, [setItems]);
+
   return (
     <>
-      <section>
-        <h1>Home working!</h1>
-      </section>
+      <NowPlayingMovies />
+      <Footer />
     </>
   );
 };

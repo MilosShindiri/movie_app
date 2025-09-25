@@ -15,10 +15,7 @@ export const router = createBrowserRouter([
     children: [
       {
         element: <AppLayout />,
-        children: [
-          { path: PagePaths.HOME, element: <HomePage /> },
-          { path: PagePaths.DETAILS, element: <DetailsPage /> },
-        ],
+        children: [{ path: PagePaths.HOME, element: <HomePage /> }],
       },
       {
         element: <ProtectedRoute />,
@@ -27,6 +24,7 @@ export const router = createBrowserRouter([
             element: <AppLayout />,
             children: [
               { path: PagePaths.TABLE, element: <TablePage /> },
+              { path: PagePaths.DETAILS, element: <DetailsPage /> },
               { path: PagePaths.CHARTS, element: <ChartsPage /> },
             ],
           },
