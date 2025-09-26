@@ -19,7 +19,7 @@ import {
   MovieTitle,
   NoImagePlaceholder,
 } from "./MovieDetailsStyled";
-import { TableLoader } from "../TableLoader";
+
 import { useState } from "react";
 
 import { useEscapeKey } from "../../hooks/useEscapeKey";
@@ -29,6 +29,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { getImageUrl, ImageSizes } from "../../utils/imageUtils";
 import EmbedPlayer from "../EmbededPlayer/EmbedPlayer";
+import { Loader } from "../Loader";
 const settings = {
   dots: true,
   infinite: true,
@@ -115,7 +116,7 @@ const MovieDetails = ({
         </DetailsContentWrapper>
 
         <SectionTitle>Similar Movies</SectionTitle>
-        {loadingSimilar && <TableLoader />}
+        {loadingSimilar && <Loader />}
         {errorSimilar && <p>Error loading similar movies.</p>}
 
         <MovieSlider>

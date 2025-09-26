@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { toast } from "react-toastify";
 import {
   useReactTable,
@@ -5,8 +6,8 @@ import {
   getPaginationRowModel,
   createColumnHelper,
 } from "@tanstack/react-table";
+import { useNavigate, type SetURLSearchParams } from "react-router-dom";
 import { useTableState } from "../../hooks/useTableState";
-import { useNavigate } from "react-router-dom";
 import { useTableParams } from "../../hooks/useTableParams";
 import { useMoviesTable } from "../../hooks/useMoviesTable";
 import type { Movie } from "../../types/movies";
@@ -14,12 +15,17 @@ import { movieDetailsPath } from "../../utils/pathUtils";
 import { Wrapper } from "./TableStyled";
 import { TableHeader } from "./TableHeader";
 
-import { TableLoader } from "../TableLoader";
 import { TableBody } from "./TableBody";
 import { TablePagination } from "./TablePagination";
 import { SidebarFilter } from "../Filters/SidebarFilter";
+import { Loader } from "../Loader";
 
-export const Table = () => {
+interface TableProps {
+  initialPageIndex: number;
+  setSearchParams: SetURLSearchParams;
+}
+
+export const Table = ({ initialPageIndex, setSearchParams }: TableProps) => {
   const {
     query,
     setQuery,
@@ -31,7 +37,8 @@ export const Table = () => {
     setFilters,
     pagination,
     setPagination,
-  } = useTableState();
+  } = useTableState(initialPageIndex);
+
   const navigate = useNavigate();
   const order = sorting[0]?.desc ? "desc" : "asc";
   const sort = sorting[0]?.id ?? "";
@@ -107,9 +114,19 @@ export const Table = () => {
   const { pageIndex } = table.getState().pagination;
   const maxPages = Math.min(data?.total_pages ?? 1, 500);
 
+  useEffect(() => {
+    setSearchParams((prev) => {
+      const newParams = new URLSearchParams(prev);
+      newParams.set("page", String(pagination.pageIndex + 1));
+      return newParams;
+    });
+  }, [pagination.pageIndex, setSearchParams]);
+
   if (error) {
     toast.error("Error loading movies.");
   }
+
+  const closeSidebar = () => setIsSidebarOpen(false);
 
   return (
     <Wrapper>
@@ -127,11 +144,12 @@ export const Table = () => {
         onApply={(newFilters) => {
           setFilters(newFilters);
           setPagination((prev) => ({ ...prev, pageIndex: 0 }));
+          closeSidebar();
         }}
       />
 
       {isLoading ? (
-        <TableLoader />
+        <Loader />
       ) : (
         <>
           <TableBody table={table} />

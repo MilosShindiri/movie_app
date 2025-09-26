@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IoMdClose } from "react-icons/io";
 import { useGenres } from "../../queries/movies";
 import type { Genre } from "../../types/movies";
@@ -29,6 +29,13 @@ export const SidebarFilter = ({
 
   const [genreId, setGenreId] = useState<number | undefined>(selectedGenre);
   const [year, setYear] = useState<number | undefined>(selectedYear);
+
+  useEffect(() => {
+    if (isOpen) {
+      setGenreId(selectedGenre);
+      setYear(selectedYear);
+    }
+  }, [isOpen, selectedGenre, selectedYear]);
 
   const handleApply = () => {
     onApply({ genre: genreId, year });

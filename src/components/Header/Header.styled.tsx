@@ -2,12 +2,24 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const StyledHeader = styled.header`
+  position: relative;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 20px;
   background-color: #201547;
   color: white;
-  height: 100px;
+  height: auto;
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
 `;
 
 export const LeftNav = styled.div`
@@ -21,12 +33,18 @@ export const CenterNav = styled.nav`
   display: flex;
   justify-content: center;
   flex: 1;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const RightNav = styled.nav`
   display: flex;
   justify-content: flex-end;
   flex: 1;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const Logo = styled.img`
@@ -81,5 +99,57 @@ export const StyledLogout = styled.button`
 
   &:hover {
     text-decoration: underline;
+  }
+`;
+
+export const HamburgerIcon = styled.div`
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block;
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
+    z-index: 10;
+  }
+`;
+
+export const MobileMenu = styled.div`
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  background-color: #2a1b5f;
+  padding: 10px 20px;
+  border-radius: 8px;
+  z-index: 9;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  @media (min-width: 769px) {
+    display: none;
+  }
+
+  ${StyledCenterLink},
+  ${StyledRightLink},
+  ${StyledLogout} {
+    margin: 10px 0;
+    font-size: 20px;
+    text-align: right;
+  }
+`;
+
+export const MobileNav = styled.div`
+  display: none;
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    align-items: center;
   }
 `;

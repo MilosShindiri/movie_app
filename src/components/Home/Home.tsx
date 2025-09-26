@@ -3,12 +3,12 @@ import { useNowPlayingMovies } from "../../queries/movies";
 import type { Movie } from "../../types/movies";
 import { getImageUrl, ImageSizes } from "../../utils/imageUtils";
 import { Card, Grid, Info, Poster, Rating, Title } from "./HomeStyled";
-import { TableLoader } from "../TableLoader";
+import { Loader } from "../Loader";
 
 const NowPlayingMovies = () => {
   const { data, isLoading, isError } = useNowPlayingMovies();
 
-  if (isLoading) return <TableLoader />;
+  if (isLoading) return <Loader />;
   if (isError)
     return (
       <p style={{ padding: "1rem", color: "#ff4d4d" }}>

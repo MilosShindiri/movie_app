@@ -8,7 +8,7 @@ import {
   CartesianGrid,
 } from "recharts";
 import { useTrendingMoviesAll, useGenres } from "../../queries/movies";
-import { TableLoader } from "../TableLoader";
+
 import { useState } from "react";
 import {
   ChartBox,
@@ -17,6 +17,7 @@ import {
   StyledSelect,
 } from "./LineChartByYearStyled";
 import type { Genre, SimpleMovie, YearPopularity } from "../../types/movies";
+import { Loader } from "../Loader";
 
 const LineChartByYear = () => {
   const [selectedGenre, setSelectedGenre] = useState<number | "all">("all");
@@ -24,7 +25,7 @@ const LineChartByYear = () => {
   const { data: genres } = useGenres();
   const { data, isLoading } = useTrendingMoviesAll("week");
 
-  if (isLoading || !data) return <TableLoader />;
+  if (isLoading || !data) return <Loader />;
 
   const filtered =
     selectedGenre === "all"
