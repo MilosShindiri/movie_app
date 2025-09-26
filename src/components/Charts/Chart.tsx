@@ -10,7 +10,7 @@ import {
 } from "recharts";
 import { useState } from "react";
 import { useGenres, useTopMovies } from "../../queries/movies";
-import { TableLoader } from "../TableLoader";
+
 import {
   ChartContainer,
   Header,
@@ -21,6 +21,7 @@ import {
   TooltipContainer,
 } from "./ChartStyled";
 import type { CustomTooltipProps, Genre, Movie } from "../../types/movies";
+import { Loader } from "../Loader";
 
 const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
   if (active && payload && payload.length > 0) {
@@ -56,7 +57,7 @@ const TrendingMoviesChart = () => {
     setSelectedGenre(value === "all" ? "all" : parseInt(value));
   };
 
-  if (isLoading) return <TableLoader />;
+  if (isLoading) return <Loader />;
   if (error) return <p>Error loading movies</p>;
 
   const filtered = data?.filter((movie: Movie) =>

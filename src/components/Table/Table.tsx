@@ -14,10 +14,11 @@ import type { Movie } from "../../types/movies";
 import { movieDetailsPath } from "../../utils/pathUtils";
 import { Wrapper } from "./TableStyled";
 import { TableHeader } from "./TableHeader";
-import { TableLoader } from "../TableLoader";
+
 import { TableBody } from "./TableBody";
 import { TablePagination } from "./TablePagination";
 import { SidebarFilter } from "../Filters/SidebarFilter";
+import { Loader } from "../Loader";
 
 interface TableProps {
   initialPageIndex: number;
@@ -148,7 +149,7 @@ export const Table = ({ initialPageIndex, setSearchParams }: TableProps) => {
       />
 
       {isLoading ? (
-        <TableLoader />
+        <Loader />
       ) : (
         <>
           <TableBody table={table} />
