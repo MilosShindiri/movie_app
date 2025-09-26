@@ -4,10 +4,21 @@ import { Link } from "react-router-dom";
 export const StyledHeader = styled.header`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 20px;
   background-color: #201547;
   color: white;
-  height: 100px;
+  height: auto;
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
 `;
 
 export const LeftNav = styled.div`
@@ -21,12 +32,18 @@ export const CenterNav = styled.nav`
   display: flex;
   justify-content: center;
   flex: 1;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const RightNav = styled.nav`
   display: flex;
   justify-content: flex-end;
   flex: 1;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const Logo = styled.img`
@@ -81,5 +98,36 @@ export const StyledLogout = styled.button`
 
   &:hover {
     text-decoration: underline;
+  }
+`;
+
+export const HamburgerIcon = styled.div`
+  display: none;
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+
+  @media (max-width: 768px) {
+    display: block;
+    margin-left: 10px;
+  }
+`;
+
+export const MobileMenu = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: #2a1b5f;
+  padding: 10px 20px;
+  box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    display: flex;
+
+    ${StyledCenterLink},
+    ${StyledRightLink},
+    ${StyledLogout} {
+      margin: 10px 0;
+      font-size: 20px;
+    }
   }
 `;
