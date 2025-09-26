@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const StyledHeader = styled.header`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -103,31 +104,52 @@ export const StyledLogout = styled.button`
 
 export const HamburgerIcon = styled.div`
   display: none;
-  font-size: 28px;
-  color: white;
-  cursor: pointer;
 
   @media (max-width: 768px) {
     display: block;
-    margin-left: 10px;
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
+    z-index: 10;
   }
 `;
 
 export const MobileMenu = styled.div`
-  display: flex;
-  flex-direction: column;
+  position: absolute;
+  top: 70px;
+  right: 20px;
   background-color: #2a1b5f;
   padding: 10px 20px;
-  box-sizing: border-box;
+  border-radius: 8px;
+  z-index: 9;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  @media (min-width: 769px) {
+    display: none;
+  }
+
+  ${StyledCenterLink},
+  ${StyledRightLink},
+  ${StyledLogout} {
+    margin: 10px 0;
+    font-size: 20px;
+    text-align: right;
+  }
+`;
+
+export const MobileNav = styled.div`
+  display: none;
 
   @media (max-width: 768px) {
     display: flex;
-
-    ${StyledCenterLink},
-    ${StyledRightLink},
-    ${StyledLogout} {
-      margin: 10px 0;
-      font-size: 20px;
-    }
+    flex: 1;
+    justify-content: flex-end;
+    align-items: center;
   }
 `;

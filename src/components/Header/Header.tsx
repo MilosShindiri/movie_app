@@ -11,6 +11,7 @@ import {
   StyledLogout,
   HamburgerIcon,
   MobileMenu,
+  MobileNav,
 } from "./Header.styled";
 
 import { useAuth } from "../../context/useAuth";
@@ -31,9 +32,6 @@ export const Header: FC = () => {
           <Logo src="/images/movie_icon.png" alt="logo" />
         </StyledLogoLink>
         <StyledH1>Movies</StyledH1>
-        <HamburgerIcon onClick={() => setMenuOpen(!menuOpen)}>
-          <FaBars />
-        </HamburgerIcon>
       </LeftNav>
 
       <CenterNav>
@@ -55,6 +53,12 @@ export const Header: FC = () => {
           <StyledRightLink to={PagePaths.LOGIN}>Login</StyledRightLink>
         )}
       </RightNav>
+
+      <MobileNav>
+        <HamburgerIcon onClick={() => setMenuOpen(!menuOpen)}>
+          <FaBars />
+        </HamburgerIcon>
+      </MobileNav>
 
       {menuOpen && (
         <MobileMenu>
