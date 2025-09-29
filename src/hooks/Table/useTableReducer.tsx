@@ -17,9 +17,19 @@ type TableAction =
   | { type: "setPagination"; payload: PaginationState }
   | { type: "updatePagination"; payload: Partial<PaginationState> };
 
-const createInitialState = (initialPageIndex: number): TableState => ({
+type InitialParams = {
+  initialPageIndex?: number;
+  initialSort?: string;
+  initialOrder?: boolean;
+};
+
+const createInitialState = ({
+  initialPageIndex = 0,
+  initialSort = "",
+  initialOrder = false,
+}: InitialParams): TableState => ({
   query: "",
-  sorting: [],
+  sorting: initialSort ? [{ id: initialSort, desc: initialOrder }] : [],
   isSidebarOpen: false,
   filters: {},
   pagination: {
@@ -50,10 +60,19 @@ const reducer = (state: TableState, action: TableAction): TableState => {
   }
 };
 
-export const useTableState = (initialPageIndex: number = 0) => {
+export const useTableState = (
+  initialPageIndex: number = 0,
+  initialSort: string = "",
+  initialOrder: boolean = false
+) => {
   const [state, dispatch] = useReducer(
     reducer,
-    createInitialState(initialPageIndex)
+    {
+      initialPageIndex,
+      initialSort,
+      initialOrder,
+    },
+    createInitialState
   );
 
   return {

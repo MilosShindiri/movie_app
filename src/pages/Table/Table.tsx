@@ -9,6 +9,9 @@ export const TablePage = () => {
 
   const pageFromUrl = Number(searchParams.get("page")) || 1;
 
+  const sortFromUrl = searchParams.get("sort") ?? "";
+  const orderFromUrl = searchParams.get("order") ?? "asc";
+
   useEffect(() => {
     setItems([
       { label: "Home", url: "/" },
@@ -19,6 +22,8 @@ export const TablePage = () => {
   return (
     <Table
       initialPageIndex={pageFromUrl - 1}
+      initialSort={sortFromUrl}
+      initialOrder={orderFromUrl === "desc"}
       setSearchParams={setSearchParams}
     />
   );

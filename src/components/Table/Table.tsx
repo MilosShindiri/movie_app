@@ -21,10 +21,17 @@ import { useTableState } from "../../hooks/Table/useTableReducer";
 
 interface TableProps {
   initialPageIndex: number;
+  initialSort?: string;
+  initialOrder?: boolean;
   setSearchParams: SetURLSearchParams;
 }
 
-export const Table = ({ initialPageIndex, setSearchParams }: TableProps) => {
+export const Table = ({
+  initialPageIndex,
+  initialSort,
+  initialOrder,
+  setSearchParams,
+}: TableProps) => {
   const {
     query,
     setQuery,
@@ -37,7 +44,7 @@ export const Table = ({ initialPageIndex, setSearchParams }: TableProps) => {
     pagination,
     setPagination,
     updatePagination,
-  } = useTableState(initialPageIndex);
+  } = useTableState(initialPageIndex, initialSort, initialOrder);
 
   const navigate = useNavigate();
 
@@ -122,6 +129,24 @@ export const Table = ({ initialPageIndex, setSearchParams }: TableProps) => {
       return newParams;
     });
   }, [pagination.pageIndex, setSearchParams]);
+
+  useEffect(() => {
+    setSearchParams((prev) => {
+      const newParams = new URLSearchParams(prev);
+
+      newParams.set("page", String(pagination.pageIndex + 1));
+
+      if (sorting.length > 0) {
+        newParams.set("sort", sorting[0].id);
+        newParams.set("order", sorting[0].desc ? "desc" : "asc");
+      } else {
+        newParams.delete("sort");
+        newParams.delete("order");
+      }
+
+      return newParams;
+    });
+  }, [pagination.pageIndex, sorting, setSearchParams]);
 
   if (error) {
     toast.error("Error loading movies.");
