@@ -102,7 +102,7 @@ export const MovieDetails = ({
                 <strong>Release Date:</strong> {formattedDate}
               </InfoParagraph>
               <InfoParagraph>
-                <strong>Rating:</strong> {movie.vote_average}
+                <strong>Rating:</strong> {movie.vote_average.toFixed(2)}
               </InfoParagraph>
               <PlayButton onClick={openModal}>
                 <FaRegPlayCircle /> Play
