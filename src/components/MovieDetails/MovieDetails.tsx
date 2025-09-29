@@ -37,7 +37,7 @@ const settings = {
   infinite: true,
   slidesToShow: 3,
   slidesToScroll: 3,
-  speed: 2000,
+  speed: 1500,
   arrows: true,
   autoplay: false,
   cssEase: "ease-in-out",

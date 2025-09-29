@@ -7,7 +7,6 @@ import {
   createColumnHelper,
 } from "@tanstack/react-table";
 import { useNavigate, type SetURLSearchParams } from "react-router-dom";
-import { useTableState } from "../../hooks/Table/useTableState";
 import { useTableParams } from "../../hooks/Table/useTableParams";
 import { useMoviesTable } from "../../hooks/Table/useMoviesTable";
 import type { Movie } from "../../types/movies";
@@ -18,6 +17,7 @@ import { TableBody } from "./TableBody/TableBody";
 import { TablePagination } from "./TablePagination/TablePagination";
 import { Loader } from "../Loader";
 import { SidebarFilter } from "../Filters/SidebarFilter/SidebarFilter";
+import { useTableState } from "../../hooks/Table/useTableReducer";
 
 interface TableProps {
   initialPageIndex: number;
@@ -36,9 +36,11 @@ export const Table = ({ initialPageIndex, setSearchParams }: TableProps) => {
     setFilters,
     pagination,
     setPagination,
+    updatePagination,
   } = useTableState(initialPageIndex);
 
   const navigate = useNavigate();
+
   const order = sorting[0]?.desc ? "desc" : "asc";
   const sort = sorting[0]?.id ?? "";
 
@@ -49,8 +51,8 @@ export const Table = ({ initialPageIndex, setSearchParams }: TableProps) => {
     pagination.pageIndex,
     filters
   );
-  const { data, isLoading, error } = useMoviesTable(params);
 
+  const { data, isLoading, error } = useMoviesTable(params);
   const movies = data?.results ?? [];
 
   const columnHelper = createColumnHelper<Movie>();
@@ -137,12 +139,12 @@ export const Table = ({ initialPageIndex, setSearchParams }: TableProps) => {
 
       <SidebarFilter
         isOpen={isSidebarOpen}
-        onClose={() => setIsSidebarOpen(false)}
+        onClose={closeSidebar}
         selectedGenre={filters.genre}
         selectedYear={filters.year}
         onApply={(newFilters) => {
           setFilters(newFilters);
-          setPagination((prev) => ({ ...prev, pageIndex: 0 }));
+          updatePagination({ pageIndex: 0 });
           closeSidebar();
         }}
       />
