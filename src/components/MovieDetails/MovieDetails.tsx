@@ -28,8 +28,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { getImageUrl, ImageSizes } from "../../utils/imageUtils";
-import EmbedPlayer from "../EmbededPlayer/EmbedPlayer";
+
 import { Loader } from "../Loader";
+import { EmbedPlayer } from "../EmbededPlayer";
+
 const settings = {
   dots: true,
   infinite: true,
@@ -57,7 +59,7 @@ const settings = {
   ],
 };
 
-const MovieDetails = ({
+export const MovieDetails = ({
   movie,
   similarMovies,
   loadingSimilar,
@@ -157,5 +159,3 @@ const MovieDetails = ({
     </DetailsWrapper>
   );
 };
-
-export default MovieDetails;

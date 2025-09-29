@@ -3,8 +3,8 @@ import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routes/Routes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { MovieHistoryWidgetProvider } from "./context/RecentMoviesContext";
-import { BreadcrumbsProvider } from "./context/BreadcrumbsContextProvider";
+import { MovieHistoryWidgetProvider } from "./context/HistoryWidget/RecentMoviesContext";
+import { BreadcrumbsProvider } from "./context/BreadCrumbs/BreadcrumbsContextProvider";
 
 const queryClient = new QueryClient();
 

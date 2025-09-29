@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { GlobalStyle } from "./styles/globalStyles";
-import { AuthProvider } from "./context/AuthContext";
+import { AuthProvider } from "./context/Auth/AuthContext";
 import { ToastContainer } from "react-toastify";
 
 export default function App() {

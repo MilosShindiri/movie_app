@@ -7,18 +7,17 @@ import {
   createColumnHelper,
 } from "@tanstack/react-table";
 import { useNavigate, type SetURLSearchParams } from "react-router-dom";
-import { useTableState } from "../../hooks/useTableState";
-import { useTableParams } from "../../hooks/useTableParams";
-import { useMoviesTable } from "../../hooks/useMoviesTable";
+import { useTableState } from "../../hooks/Table/useTableState";
+import { useTableParams } from "../../hooks/Table/useTableParams";
+import { useMoviesTable } from "../../hooks/Table/useMoviesTable";
 import type { Movie } from "../../types/movies";
 import { movieDetailsPath } from "../../utils/pathUtils";
 import { Wrapper } from "./TableStyled";
 import { TableHeader } from "./TableHeader";
-
-import { TableBody } from "./TableBody";
-import { TablePagination } from "./TablePagination";
-import { SidebarFilter } from "../Filters/SidebarFilter";
+import { TableBody } from "./TableBody/TableBody";
+import { TablePagination } from "./TablePagination/TablePagination";
 import { Loader } from "../Loader";
+import { SidebarFilter } from "../Filters/SidebarFilter/SidebarFilter";
 
 interface TableProps {
   initialPageIndex: number;

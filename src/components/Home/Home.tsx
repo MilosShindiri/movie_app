@@ -5,7 +5,7 @@ import { getImageUrl, ImageSizes } from "../../utils/imageUtils";
 import { Card, Grid, Info, Poster, Rating, Title } from "./HomeStyled";
 import { Loader } from "../Loader";
 
-const NowPlayingMovies = () => {
+export const NowPlayingMovies = () => {
   const { data, isLoading, isError } = useNowPlayingMovies();
 
   if (isLoading) return <Loader />;
@@ -39,5 +39,3 @@ const NowPlayingMovies = () => {
     </Grid>
   );
 };
-
-export default NowPlayingMovies;

@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { useRef, useState, useEffect } from "react";
 import { IoMdClose } from "react-icons/io";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { useWidget } from "../../hooks/useWidget";
+import { useWidget } from "../../hooks/Widget/useWidget";
 import {
   CloseButton,
   EmptyMessage,

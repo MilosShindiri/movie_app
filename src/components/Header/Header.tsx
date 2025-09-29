@@ -14,7 +14,7 @@ import {
   MobileNav,
 } from "./Header.styled";
 
-import { useAuth } from "../../context/useAuth";
+import { useAuth } from "../../context/Auth/useAuth";
 import type { FC } from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";

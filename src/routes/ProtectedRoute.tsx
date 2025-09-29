@@ -1,8 +1,8 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useAuth } from "../context/useAuth";
 import { useEffect, useRef } from "react";
 import { PagePaths } from "./routes_utils";
+import { useAuth } from "../context/Auth/useAuth";
 
 export const ProtectedRoute = () => {
   const { isAuthenticated, didLogout } = useAuth();

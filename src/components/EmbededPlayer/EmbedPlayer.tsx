@@ -3,7 +3,7 @@ import { BiError } from "react-icons/bi";
 import type { EmbedPlayerProps } from "../../types/embededplayer";
 import { FallbackMessage, StyledIframe } from "./EmbedPlayerStyled";
 
-const EmbedPlayer = ({ movieId }: EmbedPlayerProps) => {
+export const EmbedPlayer = ({ movieId }: EmbedPlayerProps) => {
   const [hasError, setHasError] = useState(false);
 
   return hasError ? (
@@ -22,5 +22,3 @@ const EmbedPlayer = ({ movieId }: EmbedPlayerProps) => {
     />
   );
 };
-
-export default EmbedPlayer;

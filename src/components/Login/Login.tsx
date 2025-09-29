@@ -1,6 +1,6 @@
 import { type FC } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { useAuth } from "../../context/useAuth";
+import { useAuth } from "../../context/Auth/useAuth";
 import { FormContainer, StyledButton, StyledForm } from "./LoginStyled";
 import { FormInput } from "../FormInput";
 
