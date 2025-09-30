@@ -18,8 +18,9 @@ import {
   MovieSliderItem,
   MovieTitle,
   NoImagePlaceholder,
+  NoSimilarMoviesMessage,
 } from "./MovieDetailsStyled";
-import { TableLoader } from "../TableLoader";
+
 import { useState } from "react";
 
 import { useEscapeKey } from "../../hooks/useEscapeKey";
@@ -28,13 +29,17 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { getImageUrl, ImageSizes } from "../../utils/imageUtils";
-import EmbedPlayer from "../EmbededPlayer/EmbedPlayer";
+
+import { Loader } from "../Loader";
+import { EmbedPlayer } from "../EmbededPlayer";
+import { Link } from "react-router-dom";
+
 const settings = {
   dots: true,
   infinite: true,
   slidesToShow: 3,
   slidesToScroll: 3,
-  speed: 2000,
+  speed: 1500,
   arrows: true,
   autoplay: false,
   cssEase: "ease-in-out",
@@ -56,7 +61,7 @@ const settings = {
   ],
 };
 
-const MovieDetails = ({
+export const MovieDetails = ({
   movie,
   similarMovies,
   loadingSimilar,
@@ -99,7 +104,7 @@ const MovieDetails = ({
                 <strong>Release Date:</strong> {formattedDate}
               </InfoParagraph>
               <InfoParagraph>
-                <strong>Rating:</strong> {movie.vote_average}
+                <strong>Rating:</strong> {movie.vote_average.toFixed(2)}
               </InfoParagraph>
               <PlayButton onClick={openModal}>
                 <FaRegPlayCircle /> Play
@@ -115,33 +120,37 @@ const MovieDetails = ({
         </DetailsContentWrapper>
 
         <SectionTitle>Similar Movies</SectionTitle>
-        {loadingSimilar && <TableLoader />}
-        {errorSimilar && <p>Error loading similar movies.</p>}
+        {loadingSimilar && <Loader />}
+        {errorSimilar && null}
 
-        <MovieSlider>
-          <Slider {...settings}>
-            {similarMovies.map((movie) => (
-              <MovieSliderItem key={movie.id}>
-                <a href={`/movie/${movie.id}`}>
-                  {movie.poster_path ? (
-                    <img
-                      src={getImageUrl(movie.poster_path, ImageSizes.W300)}
-                      alt={movie.title}
-                      style={{
-                        width: "100%",
-                        borderRadius: "10px",
-                        boxShadow: "0 5px 15px rgba(0, 0, 0, 0.5)",
-                      }}
-                    />
-                  ) : (
-                    <NoImagePlaceholder>No image</NoImagePlaceholder>
-                  )}
-                </a>
-                <MovieTitle>{movie.title}</MovieTitle>
-              </MovieSliderItem>
-            ))}
-          </Slider>
-        </MovieSlider>
+        {similarMovies.length === 0 && !loadingSimilar && !errorSimilar ? (
+          <NoSimilarMoviesMessage>No similar movies</NoSimilarMoviesMessage>
+        ) : (
+          <MovieSlider>
+            <Slider {...settings}>
+              {similarMovies.map((movie) => (
+                <MovieSliderItem key={movie.id}>
+                  <Link to={`/movie/${movie.id}`}>
+                    {movie.poster_path ? (
+                      <img
+                        src={getImageUrl(movie.poster_path, ImageSizes.W300)}
+                        alt={movie.title}
+                        style={{
+                          width: "100%",
+                          borderRadius: "10px",
+                          boxShadow: "0 5px 15px rgba(0, 0, 0, 0.5)",
+                        }}
+                      />
+                    ) : (
+                      <NoImagePlaceholder>No image</NoImagePlaceholder>
+                    )}
+                  </Link>
+                  <MovieTitle>{movie.title}</MovieTitle>
+                </MovieSliderItem>
+              ))}
+            </Slider>
+          </MovieSlider>
+        )}
       </DetailsData>
       {showModal && (
         <ModalOverlay onClick={closeModal}>
@@ -156,5 +165,3 @@ const MovieDetails = ({
     </DetailsWrapper>
   );
 };
-
-export default MovieDetails;

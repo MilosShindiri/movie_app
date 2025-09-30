@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { toast } from "react-toastify";
 import {
   useReactTable,
@@ -5,21 +6,32 @@ import {
   getPaginationRowModel,
   createColumnHelper,
 } from "@tanstack/react-table";
-import { useTableState } from "../../hooks/useTableState";
-import { useNavigate } from "react-router-dom";
-import { useTableParams } from "../../hooks/useTableParams";
-import { useMoviesTable } from "../../hooks/useMoviesTable";
+import { useNavigate, type SetURLSearchParams } from "react-router-dom";
+import { useTableParams } from "../../hooks/Table/useTableParams";
+import { useMoviesTable } from "../../hooks/Table/useMoviesTable";
 import type { Movie } from "../../types/movies";
 import { movieDetailsPath } from "../../utils/pathUtils";
 import { Wrapper } from "./TableStyled";
 import { TableHeader } from "./TableHeader";
+import { TableBody } from "./TableBody/TableBody";
+import { TablePagination } from "./TablePagination/TablePagination";
+import { Loader } from "../Loader";
+import { SidebarFilter } from "../Filters/SidebarFilter/SidebarFilter";
+import { useTableState } from "../../hooks/Table/useTableReducer";
 
-import { TableLoader } from "../TableLoader";
-import { TableBody } from "./TableBody";
-import { TablePagination } from "./TablePagination";
-import { SidebarFilter } from "../Filters/SidebarFilter";
+interface TableProps {
+  initialPageIndex: number;
+  initialSort?: string;
+  initialOrder?: boolean;
+  setSearchParams: SetURLSearchParams;
+}
 
-export const Table = () => {
+export const Table = ({
+  initialPageIndex,
+  initialSort,
+  initialOrder,
+  setSearchParams,
+}: TableProps) => {
   const {
     query,
     setQuery,
@@ -31,8 +43,11 @@ export const Table = () => {
     setFilters,
     pagination,
     setPagination,
-  } = useTableState();
+    updatePagination,
+  } = useTableState(initialPageIndex, initialSort, initialOrder);
+
   const navigate = useNavigate();
+
   const order = sorting[0]?.desc ? "desc" : "asc";
   const sort = sorting[0]?.id ?? "";
 
@@ -43,8 +58,8 @@ export const Table = () => {
     pagination.pageIndex,
     filters
   );
-  const { data, isLoading, error } = useMoviesTable(params);
 
+  const { data, isLoading, error } = useMoviesTable(params);
   const movies = data?.results ?? [];
 
   const columnHelper = createColumnHelper<Movie>();
@@ -107,9 +122,39 @@ export const Table = () => {
   const { pageIndex } = table.getState().pagination;
   const maxPages = Math.min(data?.total_pages ?? 1, 500);
 
-  if (error) {
-    toast.error("Error loading movies.");
-  }
+  useEffect(() => {
+    setSearchParams((prev) => {
+      const newParams = new URLSearchParams(prev);
+      newParams.set("page", String(pagination.pageIndex + 1));
+      return newParams;
+    });
+  }, [pagination.pageIndex, setSearchParams]);
+
+  useEffect(() => {
+    setSearchParams((prev) => {
+      const newParams = new URLSearchParams(prev);
+
+      newParams.set("page", String(pagination.pageIndex + 1));
+
+      if (sorting.length > 0) {
+        newParams.set("sort", sorting[0].id);
+        newParams.set("order", sorting[0].desc ? "desc" : "asc");
+      } else {
+        newParams.delete("sort");
+        newParams.delete("order");
+      }
+
+      return newParams;
+    });
+  }, [pagination.pageIndex, sorting, setSearchParams]);
+
+  useEffect(() => {
+    if (error) {
+      toast.error("Error loading movies.");
+    }
+  }, [error]);
+
+  const closeSidebar = () => setIsSidebarOpen(false);
 
   return (
     <Wrapper>
@@ -121,17 +166,18 @@ export const Table = () => {
 
       <SidebarFilter
         isOpen={isSidebarOpen}
-        onClose={() => setIsSidebarOpen(false)}
+        onClose={closeSidebar}
         selectedGenre={filters.genre}
         selectedYear={filters.year}
         onApply={(newFilters) => {
           setFilters(newFilters);
-          setPagination((prev) => ({ ...prev, pageIndex: 0 }));
+          updatePagination({ pageIndex: 0 });
+          closeSidebar();
         }}
       />
 
       {isLoading ? (
-        <TableLoader />
+        <Loader />
       ) : (
         <>
           <TableBody table={table} />

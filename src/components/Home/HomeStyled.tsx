@@ -46,3 +46,13 @@ export const Rating = styled.p`
   font-size: 0.85rem;
   color: #bbbbbb;
 `;
+
+export const PageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`;
+
+export const MainContent = styled.main`
+  flex: 1;
+`;

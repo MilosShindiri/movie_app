@@ -2,7 +2,11 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Nav = styled.nav`
-  padding: 16px;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  padding: 16px 32px;
+  z-index: 5;
 `;
 
 export const List = styled.ol`
@@ -33,5 +37,5 @@ export const CrumbLink = styled(Link)`
 `;
 
 export const CrumbCurrent = styled.span`
-  color: #6c757d;
+  color: #ced4da;
 `;

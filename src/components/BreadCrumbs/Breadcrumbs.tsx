@@ -1,4 +1,4 @@
-import { useBreadcrumbs } from "../../context/useBreadcrumbs";
+import { useBreadcrumbs } from "../../context/BreadCrumbs/useBreadcrumbs";
 import {
   CrumbCurrent,
   CrumbLink,
@@ -7,7 +7,7 @@ import {
   Nav,
 } from "./BreadcrumbsStyled";
 
-const Breadcrumbs = () => {
+export const Breadcrumbs = () => {
   const { items } = useBreadcrumbs();
 
   if (!items || items.length === 0) return null;
@@ -32,5 +32,3 @@ const Breadcrumbs = () => {
     </Nav>
   );
 };
-
-export default Breadcrumbs;

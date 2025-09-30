@@ -9,20 +9,27 @@ import {
   StyledCenterLink,
   StyledRightLink,
   StyledLogout,
+  HamburgerIcon,
+  MobileMenu,
+  MobileNav,
 } from "./Header.styled";
-import { useAuth } from "../../context/useAuth";
+
+import { useAuth } from "../../context/Auth/useAuth";
 import type { FC } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { PagePaths } from "../../routes/routes_utils";
+import { FaBars } from "react-icons/fa";
 
 export const Header: FC = () => {
   const { isAuthenticated, logout } = useAuth();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <StyledHeader>
       <LeftNav>
         <StyledLogoLink to={PagePaths.HOME}>
-          <Logo src="/public/images/movie_icon.png" alt="logo" />
+          <Logo src="/images/movie_icon.png" alt="logo" />
         </StyledLogoLink>
         <StyledH1>Movies</StyledH1>
       </LeftNav>
@@ -46,6 +53,47 @@ export const Header: FC = () => {
           <StyledRightLink to={PagePaths.LOGIN}>Login</StyledRightLink>
         )}
       </RightNav>
+
+      <MobileNav>
+        <HamburgerIcon onClick={() => setMenuOpen(!menuOpen)}>
+          <FaBars />
+        </HamburgerIcon>
+      </MobileNav>
+
+      {menuOpen && (
+        <MobileMenu>
+          <StyledCenterLink
+            to={PagePaths.TABLE}
+            onClick={() => setMenuOpen(false)}
+          >
+            Table
+          </StyledCenterLink>
+          <StyledCenterLink
+            to={PagePaths.CHARTS}
+            onClick={() => setMenuOpen(false)}
+          >
+            Charts
+          </StyledCenterLink>
+          {isAuthenticated ? (
+            <StyledLogout
+              onClick={() => {
+                logout();
+                toast.info("You have been logged out.");
+                setMenuOpen(false);
+              }}
+            >
+              Logout
+            </StyledLogout>
+          ) : (
+            <StyledRightLink
+              to={PagePaths.LOGIN}
+              onClick={() => setMenuOpen(false)}
+            >
+              Login
+            </StyledRightLink>
+          )}
+        </MobileMenu>
+      )}
     </StyledHeader>
   );
 };

@@ -32,6 +32,11 @@ export const Wrapper = styled.div`
   box-shadow: none;
   font-family: "Arial", sans-serif;
   color: #222;
+  @media (max-width: 768px) {
+    width: 400px;
+    overflow: scroll;
+    margin-top: 4rem;
+  }
 `;
 
 export const Header = styled.div`
@@ -46,6 +51,11 @@ export const Header = styled.div`
     margin: 0;
     font-weight: 700;
     font-size: 1.8rem;
+  }
+
+  @media (max-width: 768px) {
+    width: 600px;
+    overflow: scroll;
   }
 `;
 
@@ -152,6 +162,9 @@ export const PaginationWrapper = styled.div`
       background-color: #ffffff;
       color: #0366d6;
       border: 2px solid #0366d6;
+    }
+    @media (max-width: 768px) {
+      min-width: 30px;
     }
   }
 

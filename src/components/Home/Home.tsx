@@ -3,18 +3,20 @@ import { useNowPlayingMovies } from "../../queries/movies";
 import type { Movie } from "../../types/movies";
 import { getImageUrl, ImageSizes } from "../../utils/imageUtils";
 import { Card, Grid, Info, Poster, Rating, Title } from "./HomeStyled";
-import { TableLoader } from "../TableLoader";
+import { Loader } from "../Loader";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
-const NowPlayingMovies = () => {
+export const NowPlayingMovies = () => {
   const { data, isLoading, isError } = useNowPlayingMovies();
 
-  if (isLoading) return <TableLoader />;
-  if (isError)
-    return (
-      <p style={{ padding: "1rem", color: "#ff4d4d" }}>
-        Problem loading movies.
-      </p>
-    );
+  useEffect(() => {
+    if (isError) {
+      toast.error("Error loading movies.");
+    }
+  }, [isError]);
+
+  if (isLoading) return <Loader />;
 
   return (
     <Grid>
@@ -39,5 +41,3 @@ const NowPlayingMovies = () => {
     </Grid>
   );
 };
-
-export default NowPlayingMovies;

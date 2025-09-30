@@ -1,6 +1,6 @@
-import { type FC } from "react";
+import { useState, type FC } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { useAuth } from "../../context/useAuth";
+import { useAuth } from "../../context/Auth/useAuth";
 import { FormContainer, StyledButton, StyledForm } from "./LoginStyled";
 import { FormInput } from "../FormInput";
 
@@ -12,6 +12,7 @@ export interface IFormInput {
 
 export const Login: FC = () => {
   const { login } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -20,7 +21,13 @@ export const Login: FC = () => {
   } = useForm<IFormInput>();
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    await login(data);
+    if (isLoading) return;
+    setIsLoading(true);
+    try {
+      await login(data);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -57,7 +64,9 @@ export const Login: FC = () => {
           error={errors.code}
         />
 
-        <StyledButton type="submit">Login</StyledButton>
+        <StyledButton type="submit" disabled={isLoading}>
+          {isLoading ? "Logging in..." : "Login"}
+        </StyledButton>
       </StyledForm>
     </FormContainer>
   );
