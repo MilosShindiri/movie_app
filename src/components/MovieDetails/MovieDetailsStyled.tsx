@@ -36,7 +36,6 @@ export const DetailsBackground = styled.div<DetailBackgroundProps>`
 `;
 
 export const DetailsData = styled.div`
-  padding: 0rem;
   max-width: 1200px;
   margin: 0 auto;
   margin-top: -50px;
@@ -46,8 +45,17 @@ export const DetailsData = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   min-height: 100vh;
+  padding: 0 1rem;
   padding-bottom: 20px;
   overflow-x: hidden;
+
+  @media (min-width: 768px) {
+    padding: 0 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 0 3rem;
+  }
 `;
 
 export const DetailsContentWrapper = styled.div`
@@ -57,15 +65,24 @@ export const DetailsContentWrapper = styled.div`
   margin-bottom: 2rem;
   align-items: start;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    gap: 1rem;
   }
 `;
 
 export const DetailsLeft = styled.div`
   flex: 1 1 300px;
-  min-width: 280px;
+  min-width: 250px;
   width: fit-content;
+
+  @media (max-width: 768px) {
+    margin: 0 auto;
+  }
 `;
 
 export const DetailsRight = styled.div`
@@ -73,32 +90,47 @@ export const DetailsRight = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 1rem;
   padding-top: 0.5rem;
   position: relative;
-  gap: 1rem;
+
   & > div:last-child {
     margin-top: 110px;
+
+    @media (max-width: 768px) {
+      margin-top: 20px;
+      padding-bottom: 40px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    align-items: center;
+    text-align: center;
   }
 `;
 
 export const PosterImage = styled.img`
   width: 100%;
-  max-width: 780px;
+  max-width: 300px;
   border-radius: 10px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  margin: 0 auto;
 `;
 
 export const SectionTitle = styled.h2`
   margin-top: 1rem;
   margin-bottom: 1.5rem;
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: bold;
   color: #ffcc00;
   text-align: center;
   border-bottom: 2px solid #ffcc00;
   display: inline-block;
   padding-bottom: 5px;
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
 `;
 
 export const InfoParagraph = styled.p`
@@ -145,6 +177,10 @@ export const PlayButton = styled.button`
     outline: 2px solid #00bcd4;
     outline-offset: 2px;
   }
+
+  @media (max-width: 768px) {
+    margin: 1.5rem auto 0 auto;
+  }
 `;
 
 export const ModalOverlay = styled.div`
@@ -190,8 +226,11 @@ export const CloseButton = styled.button`
 
 export const MovieSlider = styled.div`
   margin-bottom: 20px;
-  padding: 0 50px 40px;
+  padding: 0 1rem 40px;
   position: relative;
+  @media (max-width: 768px) {
+    padding: 0 2rem 40px;
+  }
 
   .slick-dots {
     bottom: -25px;
@@ -297,4 +336,12 @@ export const NoImagePlaceholder = styled.div`
     transform: scale(1.05);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
   }
+`;
+
+export const NoSimilarMoviesMessage = styled.p`
+  text-align: center;
+  color: #aaa;
+  font-size: 1rem;
+  font-style: italic;
+  margin: 2rem 0;
 `;

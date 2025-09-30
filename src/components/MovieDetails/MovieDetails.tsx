@@ -18,6 +18,7 @@ import {
   MovieSliderItem,
   MovieTitle,
   NoImagePlaceholder,
+  NoSimilarMoviesMessage,
 } from "./MovieDetailsStyled";
 
 import { useState } from "react";
@@ -31,6 +32,7 @@ import { getImageUrl, ImageSizes } from "../../utils/imageUtils";
 
 import { Loader } from "../Loader";
 import { EmbedPlayer } from "../EmbededPlayer";
+import { Link } from "react-router-dom";
 
 const settings = {
   dots: true,
@@ -119,32 +121,36 @@ export const MovieDetails = ({
 
         <SectionTitle>Similar Movies</SectionTitle>
         {loadingSimilar && <Loader />}
-        {errorSimilar && <p>Error loading similar movies.</p>}
+        {errorSimilar && null}
 
-        <MovieSlider>
-          <Slider {...settings}>
-            {similarMovies.map((movie) => (
-              <MovieSliderItem key={movie.id}>
-                <a href={`/movie/${movie.id}`}>
-                  {movie.poster_path ? (
-                    <img
-                      src={getImageUrl(movie.poster_path, ImageSizes.W300)}
-                      alt={movie.title}
-                      style={{
-                        width: "100%",
-                        borderRadius: "10px",
-                        boxShadow: "0 5px 15px rgba(0, 0, 0, 0.5)",
-                      }}
-                    />
-                  ) : (
-                    <NoImagePlaceholder>No image</NoImagePlaceholder>
-                  )}
-                </a>
-                <MovieTitle>{movie.title}</MovieTitle>
-              </MovieSliderItem>
-            ))}
-          </Slider>
-        </MovieSlider>
+        {similarMovies.length === 0 && !loadingSimilar && !errorSimilar ? (
+          <NoSimilarMoviesMessage>No similar movies</NoSimilarMoviesMessage>
+        ) : (
+          <MovieSlider>
+            <Slider {...settings}>
+              {similarMovies.map((movie) => (
+                <MovieSliderItem key={movie.id}>
+                  <Link to={`/movie/${movie.id}`}>
+                    {movie.poster_path ? (
+                      <img
+                        src={getImageUrl(movie.poster_path, ImageSizes.W300)}
+                        alt={movie.title}
+                        style={{
+                          width: "100%",
+                          borderRadius: "10px",
+                          boxShadow: "0 5px 15px rgba(0, 0, 0, 0.5)",
+                        }}
+                      />
+                    ) : (
+                      <NoImagePlaceholder>No image</NoImagePlaceholder>
+                    )}
+                  </Link>
+                  <MovieTitle>{movie.title}</MovieTitle>
+                </MovieSliderItem>
+              ))}
+            </Slider>
+          </MovieSlider>
+        )}
       </DetailsData>
       {showModal && (
         <ModalOverlay onClick={closeModal}>

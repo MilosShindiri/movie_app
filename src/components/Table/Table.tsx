@@ -148,9 +148,11 @@ export const Table = ({
     });
   }, [pagination.pageIndex, sorting, setSearchParams]);
 
-  if (error) {
-    toast.error("Error loading movies.");
-  }
+  useEffect(() => {
+    if (error) {
+      toast.error("Error loading movies.");
+    }
+  }, [error]);
 
   const closeSidebar = () => setIsSidebarOpen(false);
 

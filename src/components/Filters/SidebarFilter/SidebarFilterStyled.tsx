@@ -14,6 +14,9 @@ export const SidebarWrapper = styled.div<{ $isOpen: boolean }>`
   border-radius: 0 8px 8px 0;
   max-height: 80%;
   overflow-y: auto;
+  @media (max-width: 768px) {
+    padding-left: 2rem;
+  }
 `;
 
 export const SidebarHeader = styled.div`

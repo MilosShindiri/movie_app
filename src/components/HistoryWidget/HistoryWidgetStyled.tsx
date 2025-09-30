@@ -156,6 +156,15 @@ export const MoviePoster = styled.div`
   overflow: hidden;
   background-color: #2d3748;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ccc;
+  font-size: 10px;
+  font-style: italic;
+  text-align: center;
+  padding: 4px;
+
   img {
     width: 100%;
     height: 100%;

@@ -4,17 +4,19 @@ import type { Movie } from "../../types/movies";
 import { getImageUrl, ImageSizes } from "../../utils/imageUtils";
 import { Card, Grid, Info, Poster, Rating, Title } from "./HomeStyled";
 import { Loader } from "../Loader";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 export const NowPlayingMovies = () => {
   const { data, isLoading, isError } = useNowPlayingMovies();
 
+  useEffect(() => {
+    if (isError) {
+      toast.error("Error loading movies.");
+    }
+  }, [isError]);
+
   if (isLoading) return <Loader />;
-  if (isError)
-    return (
-      <p style={{ padding: "1rem", color: "#ff4d4d" }}>
-        Problem loading movies.
-      </p>
-    );
 
   return (
     <Grid>

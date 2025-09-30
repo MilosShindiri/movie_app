@@ -8,7 +8,7 @@ import {
   CartesianGrid,
   Label,
 } from "recharts";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGenres, useTopMovies } from "../../../queries/movies";
 
 import {
@@ -22,6 +22,7 @@ import {
 } from "./ChartStyled";
 import type { CustomTooltipProps, Genre, Movie } from "../../../types/movies";
 import { Loader } from "../../Loader";
+import { toast } from "react-toastify";
 
 const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
   if (active && payload && payload.length > 0) {
@@ -57,8 +58,21 @@ const TrendingMoviesChart = () => {
     setSelectedGenre(value === "all" ? "all" : parseInt(value));
   };
 
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (error) {
+      toast.error("Error loading movies.");
+    }
+  }, [error]);
+
   if (isLoading) return <Loader />;
-  if (error) return <p>Error loading movies</p>;
 
   const filtered = data?.filter((movie: Movie) =>
     selectedGenre === "all" ? true : movie.genre_ids.includes(selectedGenre)
@@ -103,7 +117,12 @@ const TrendingMoviesChart = () => {
         <BarChart
           data={top10}
           layout="vertical"
-          margin={{ top: 20, right: 40, left: 100, bottom: 40 }}
+          margin={{
+            top: 20,
+            right: windowWidth < 500 ? 10 : 40,
+            left: windowWidth < 500 ? 40 : 100,
+            bottom: 40,
+          }}
         >
           <CartesianGrid strokeDasharray="3 3" stroke="#333" />
           <XAxis type="number" stroke="#ccc">
@@ -117,8 +136,8 @@ const TrendingMoviesChart = () => {
           <YAxis
             type="category"
             dataKey="name"
-            width={250}
-            tick={{ fontSize: 13, fill: "#fff" }}
+            width={windowWidth < 500 ? 100 : 200}
+            tick={{ fontSize: windowWidth < 500 ? 10 : 13, fill: "#fff" }}
           >
             <Label
               value="Name"
@@ -134,7 +153,7 @@ const TrendingMoviesChart = () => {
           <Bar
             dataKey="popularity"
             fill="#9c6bff"
-            barSize={24}
+            barSize={windowWidth < 500 ? 16 : 24}
             radius={[0, 10, 10, 0]}
             animationDuration={800}
           />

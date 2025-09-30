@@ -76,7 +76,11 @@ export const HistoryWidget: FC = () => {
                     <MovieTitle>{movie.title}</MovieTitle>
                   </MovieInfo>
                   <MoviePoster>
-                    <img src={movie.poster} alt={movie.title} />
+                    {movie.poster ? (
+                      <img src={movie.poster} alt={movie.title} />
+                    ) : (
+                      <span>No image</span>
+                    )}
                   </MoviePoster>
                 </HistoryItem>
               ))
