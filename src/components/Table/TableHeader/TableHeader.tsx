@@ -6,15 +6,25 @@ interface Props {
   query: string;
   setQuery: (val: string) => void;
   toggleSidebar: () => void;
+  isFilterActive: boolean;
 }
 
-export const TableHeader = ({ query, setQuery, toggleSidebar }: Props) => {
+export const TableHeader = ({
+  query,
+  setQuery,
+  toggleSidebar,
+  isFilterActive,
+}: Props) => {
   return (
     <Header>
       <h1>Explore our movie collection</h1>
       <FilterContainer>
         <Filters onClick={toggleSidebar} />
-        <SearchFilter query={query} onQueryChange={setQuery} />
+        <SearchFilter
+          query={query}
+          onQueryChange={setQuery}
+          isFilterActive={isFilterActive}
+        />
       </FilterContainer>
     </Header>
   );

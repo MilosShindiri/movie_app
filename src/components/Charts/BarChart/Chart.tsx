@@ -148,6 +148,7 @@ const TrendingMoviesChart = () => {
           </YAxis>
           <Tooltip
             content={<CustomTooltip />}
+            animationDuration={0}
             cursor={{ fill: "rgba(255, 255, 255, 0.05)" }}
           />
           <Bar
