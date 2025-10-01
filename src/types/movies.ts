@@ -37,6 +37,7 @@ export interface Genre {
 export interface SearchFilterProps {
   query: string;
   onQueryChange: (value: string) => void;
+  isFilterActive?: boolean;
 }
 
 export interface SimilarMovie {
