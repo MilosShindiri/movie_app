@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState, useCallback, type ReactNode } from "react";
 import { MovieHistoryWidgetContext } from "./HistoryContext";
 import type { MovieHistoryItem } from "../../types/historyWidget";
 
@@ -40,23 +40,22 @@ export const MovieHistoryWidgetProvider = ({
     }
   }, [isLoaded]);
 
-  const addToHistory = (movie: MovieHistoryItem) => {
+  const addToHistory = useCallback((movie: MovieHistoryItem) => {
     setMovieHistory((prevState) => {
       const filtered = prevState.filter((current) => current.id !== movie.id);
       const updated = [movie, ...filtered];
-
       return updated.slice(0, MAX_MOVIES_IN_HISTORY);
     });
-  };
+  }, []);
 
-  const removeFromHistory = (id: number) => {
+  const removeFromHistory = useCallback((id: number) => {
     setMovieHistory((prev) => prev.filter((current) => current.id !== id));
-  };
+  }, []);
 
-  const clearHistory = () => {
+  const clearHistory = useCallback(() => {
     setMovieHistory([]);
     localStorage.removeItem("movieHistory");
-  };
+  }, []);
 
   return (
     <MovieHistoryWidgetContext.Provider

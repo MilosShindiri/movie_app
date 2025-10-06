@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useMovieDetails, useSimilarMovies } from "../../queries/movies";
 import { toast } from "react-toastify";
@@ -25,7 +25,6 @@ export const DetailsPage = () => {
   } = useSimilarMovies(id!);
 
   const { addToHistory } = useMovieHistory();
-  const addToHistoryRef = useRef(addToHistory);
 
   useEffect(() => {
     if (movie) {
@@ -38,18 +37,14 @@ export const DetailsPage = () => {
   }, [movie, setItems]);
 
   useEffect(() => {
-    addToHistoryRef.current = addToHistory;
-  }, [addToHistory]);
-
-  useEffect(() => {
     if (movie) {
-      addToHistoryRef.current({
+      addToHistory({
         id: movie.id,
         title: movie.title,
         poster: getImageUrl(movie.poster_path, ImageSizes.W300),
       });
     }
-  }, [movie]);
+  }, [movie, addToHistory]);
 
   useEffect(() => {
     if (errorDetails) {
