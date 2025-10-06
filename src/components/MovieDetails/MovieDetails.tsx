@@ -27,14 +27,14 @@ import { useEscapeKey } from "../../hooks/useEscapeKey";
 import { IoMdClose } from "react-icons/io";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
+import Slider, { type Settings } from "react-slick";
 import { getImageUrl, ImageSizes } from "../../utils/imageUtils";
 
 import { Loader } from "../Loader";
 import { EmbedPlayer } from "../EmbededPlayer";
 import { Link } from "react-router-dom";
 
-const settings = {
+const settings: Settings = {
   dots: true,
   infinite: true,
   slidesToShow: 3,

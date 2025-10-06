@@ -50,6 +50,7 @@ export const Table = ({
 
   const order = sorting[0]?.desc ? "desc" : "asc";
   const sort = sorting[0]?.id ?? "";
+  const isFilterActive = Boolean(filters.genre || filters.year);
 
   const params = useTableParams(
     query,
@@ -162,6 +163,7 @@ export const Table = ({
         query={query}
         setQuery={setQuery}
         toggleSidebar={() => setIsSidebarOpen((prev) => !prev)}
+        isFilterActive={isFilterActive}
       />
 
       <SidebarFilter
@@ -171,6 +173,7 @@ export const Table = ({
         selectedYear={filters.year}
         onApply={(newFilters) => {
           setFilters(newFilters);
+          setQuery("");
           updatePagination({ pageIndex: 0 });
           closeSidebar();
         }}
